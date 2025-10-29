@@ -18,8 +18,8 @@
     --bs-white: #fff;
     --bs-gray: #6c757d;
     --bs-gray-dark: #343a40;
-    --bs-primary: #4c763b;
-    --bs-secondary: #1a3d64;
+    --bs-primary: #1a3d64;
+    --bs-secondary: #4c763b;
     --bs-success: #198754;
     --bs-info: #0dcaf0;
     --bs-warning: #ffc107;
@@ -205,7 +205,7 @@ sup {
 }
 a {
     color: #0d6efd;
-    text-decoration: underline;
+    text-decoration: none;
 }
 a:hover {
     color: #0a58ca;
@@ -1676,7 +1676,7 @@ progress {
     color: var(--bs-table-hover-color);
 }
 .table-primary {
-    --bs-table-bg: #cfe2ff;
+    --bs-table-bg: #1a3d64;
     --bs-table-striped-bg: #c5d7f2;
     --bs-table-striped-color: #000;
     --bs-table-active-bg: #bacbe6;
@@ -2628,13 +2628,13 @@ fieldset:disabled .btn {
 }
 .btn-primary {
     color: #fff;
-    background-color: #4c763b;
-    border-color: #4c763b;
+    background-color: #1a3d64;
+    border-color: #1a3d64;
 }
 .btn-primary:hover {
     color: #fff;
-    background-color: #386641;
-    border-color: #386641;
+    background-color: #3674b5;
+    border-color: #3674b5;
 }
 .btn-check:focus + .btn-primary,
 .btn-primary:focus {
@@ -2867,8 +2867,8 @@ fieldset:disabled .btn {
 }
 .btn-light:hover {
     color: #000;
-    background-color: #f9fafb;
-    border-color: #f9fafb;
+    background-color: #e0e0e0;
+    border-color: #e0e0e0;
 }
 .btn-check:focus + .btn-light,
 .btn-light:focus {
@@ -2939,13 +2939,13 @@ fieldset:disabled .btn {
     border-color: #212529;
 }
 .btn-outline-primary {
-    color: #0d6efd;
-    border-color: #0d6efd;
+    color: #1a3d64;
+    border-color: #1a3d64;
 }
 .btn-outline-primary:hover {
     color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: #1a3d64;
+    border-color: #1a3d64;
 }
 .btn-check:focus + .btn-outline-primary,
 .btn-outline-primary:focus {
@@ -3285,8 +3285,8 @@ fieldset:disabled .btn {
     z-index: 1000;
     display: none;
     min-width: 10rem;
-    padding: 0.5rem 0;
-    margin: 0;
+    padding: 0.5rem;
+    margin: 1rem;
     font-size: 1rem;
     color: #212529;
     text-align: left;
@@ -3489,14 +3489,14 @@ fieldset:disabled .btn {
 }
 .dropdown-item:focus,
 .dropdown-item:hover {
-    color: #1e2125;
-    background-color: #e9ecef;
+    color: #fff;
+    background-color: var(--bs-primary);
 }
 .dropdown-item.active,
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #0d6efd;
+    background-color: var(--bs-primary);
 }
 .dropdown-item.disabled,
 .dropdown-item:disabled {
@@ -4444,7 +4444,7 @@ fieldset:disabled .btn {
     padding: 1.25rem 1rem;
 }
 .alert-primary {
-    color: #084298;
+    color: #1a3d64;
     background-color: #cfe2ff;
     border-color: #b6d4fe;
 }
@@ -4783,18 +4783,18 @@ fieldset:disabled .btn {
     border-bottom-width: 0;
 }
 .list-group-item-primary {
-    color: #084298;
+    color: #1a3d64;
     background-color: #cfe2ff;
 }
 .list-group-item-primary.list-group-item-action:focus,
 .list-group-item-primary.list-group-item-action:hover {
-    color: #084298;
+    color: #1a3d64;
     background-color: #bacbe6;
 }
 .list-group-item-primary.list-group-item-action.active {
     color: #fff;
-    background-color: #084298;
-    border-color: #084298;
+    background-color: #1a3d64;
+    border-color: #1a3d64;
 }
 .list-group-item-secondary {
     color: #41464b;
@@ -5811,11 +5811,11 @@ fieldset:disabled .btn {
     content: "";
 }
 .link-primary {
-    color: #0d6efd;
+    color: #1a3d64;
 }
 .link-primary:focus,
 .link-primary:hover {
-    color: #0a58ca;
+    color: #1a3d64;
 }
 .link-secondary {
     color: #6c757d;
@@ -6153,7 +6153,7 @@ fieldset:disabled .btn {
     border-left: 0 !important;
 }
 .border-primary {
-    border-color: #0d6efd !important;
+    border-color: #1a3d64 !important;
 }
 .border-secondary {
     border-color: #6c757d !important;
@@ -6780,7 +6780,7 @@ fieldset:disabled .btn {
     word-break: break-word !important;
 }
 .text-primary {
-    color: #0d6efd !important;
+    color: #1a3d64 !important;
 }
 .text-secondary {
     color: #6c757d !important;
@@ -6822,7 +6822,7 @@ fieldset:disabled .btn {
     color: inherit !important;
 }
 .bg-primary {
-    background-color: #4c763b !important;
+    background-color: #1a3d64 !important;
 }
 .bg-secondary {
     background-color: #6c757d !important;

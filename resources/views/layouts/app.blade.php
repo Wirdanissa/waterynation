@@ -14,6 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=montserrat" rel="stylesheet" />
     {{-- Script Css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 

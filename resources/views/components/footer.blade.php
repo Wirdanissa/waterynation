@@ -45,7 +45,7 @@
             </div>
 
             <div class="col-lg-4">
-                <h3 class="footer-heading fs-5 fw-bold text-light mb-3 mt-2"><span>Ikuti Informasi Kami</span></h3>
+                <h3 class="footer-heading fs-5 fw-bold text-light mb-3 mt-2 pb-3"><span>Ikuti Informasi Kami</span></h3>
                 <div class="row">
                     <div class="col-lg-6 col-12">
                         <ul class="list-unstyled">
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="row py-3 mt-5 border-top">
+            <div class="row py-3 mt-2 border-top">
                 <div class="col-12 text-center text-lg-start">
                     <div class="copyright text-light">
                         <p>

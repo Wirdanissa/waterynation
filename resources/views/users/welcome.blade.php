@@ -4,7 +4,7 @@
 @section('menuBeranda', 'active')
 
 @section('content')
-    <div class="container-fluid bg-light py-5 min-vh-100">
+    <div class="container-fluid bg-light py-5">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-8 text-center">
                 <img src="{{ asset('assets/img/icon.png') }}" alt="Watery Nation Logo" width="100"

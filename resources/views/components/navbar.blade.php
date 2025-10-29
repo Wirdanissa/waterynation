@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2 shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2 shadow-sm sticky-lg-top">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
             <img src="{{ asset('assets/img/icon.png') }}" alt="Logo" width="45" height="45"

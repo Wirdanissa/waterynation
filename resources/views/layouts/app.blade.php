@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('assets/img/icon.png') }}">
+    <title>@yield('title')</title>
+
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=montserrat" rel="stylesheet" />
+    {{-- Script Css --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+</head>
+
+<body>
+    @include('components.navbar')
+
+    <main class="py-4">
+
+        @yield('content')
+    </main>
+
+    @include('components.footer')
+
+    {{-- Script JS --}}
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>

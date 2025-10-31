@@ -29,22 +29,31 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+           $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', "regex:/^[\p{L}\s']+$/u"],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', 'min:8', Rules\Password::defaults()],
+        ],[
+            'name.required' => 'Nama tidak boleh kosong',
+            'name.regex' => 'Nama tidak boleh mengandung simbol',
+            'email.required' => 'Email tidak boleh kosong',
+            'password.required' => 'Password tidak boleh kosong',
+            'password.confirmed' => 'Password tidak sama',
+            'password.min' => 'Password minimal 8 karakter',
+            'email.unique' => 'Email sudah digunakan',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('login')
+            ->with('success', 'Email verifikasi telah berhasil dikirim ke ' . $user->email);
     }
 }

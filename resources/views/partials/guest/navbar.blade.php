@@ -56,7 +56,7 @@
                 @switch(Auth::check() ? Auth::user()->role : 'guest')
                     @case('Admin')
                         <li class="nav-item d-lg-none">
-                            <a href="" class="btn btn-light w-100 mt-2">Dashboard</a>
+                            <a href="{{ route('admin.dashboard') }}" class="btn btn-light w-100 mt-2">Dashboard</a>
                         </li>
                     @break
 

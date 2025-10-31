@@ -2957,8 +2957,8 @@ fieldset:disabled .btn {
 .btn-outline-primary.dropdown-toggle.show,
 .btn-outline-primary:active {
     color: #fff;
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: #1a3d64;
+    border-color: #1a3d64;
 }
 .btn-check:active + .btn-outline-primary:focus,
 .btn-check:checked + .btn-outline-primary:focus,
@@ -3712,7 +3712,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
     color: #fff;
-    background-color: #0d6efd;
+    background-color: var(--bs-primary);
 }
 .nav-fill .nav-item,
 .nav-fill > .nav-link {

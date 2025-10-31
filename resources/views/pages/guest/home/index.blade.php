@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('title', 'Watery Nation - Belajar dan Beraksi untuk Menjaga Air')
 @section('menuBeranda', 'active')

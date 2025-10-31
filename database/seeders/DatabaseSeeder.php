@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'waterynation@gmail.com',
             'email_verified_at' => Carbon::now(),
             'password' => bcrypt('12345678'),
-            'role' => 'Admin',
+            'role' => 'admin',
         ]);
     }
 }

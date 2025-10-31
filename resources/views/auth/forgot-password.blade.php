@@ -1,25 +1,32 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+@extends('auth.layouts.auth')
+@section('title', 'Lupa Sandi | Watery Nation')
+@section('content')
+    <div class="mb-3">
+        <p class="text-muted lh-base" style="font-size: 0.95rem;">
+            <span class="fw-bold text-dark d-block mb-1">Lupa Kata Sandi?</span>
+            Tidak masalah! Cukup berikan alamat email Anda dan kami akan mengirimkan tautan untuk mereset kata sandi Anda.
+        </p>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
+    <form action="{{ route('password.email') }}">
         @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="bi bi-envelope-fill"></i>
+                </span>
+                <input type="email" class="form-control border-primary @error('email') is-invalid @enderror"
+                    id="email" name="email" placeholder="Masukkan alamat email anda" autofocus>
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
+        <button type="submit" class="btn btn-primary d-grid w-100">
+            Kirim Tautan Reset Kata Sandi
+        </button>
     </form>
-</x-guest-layout>
+@endsection

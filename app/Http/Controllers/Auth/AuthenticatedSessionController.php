@@ -27,8 +27,24 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $user = Auth::user();
+        if(!$user->email_verified_at) {
+            return redirect()->route('verification.notice');
+        }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('home');
+        }
+
+        $redirect = redirect()->route('home');
+
+        if ($request->has('redirect')) {
+            return redirect()->to($request->get('redirect'));
+        }
+
+        return $redirect;
     }
 
     /**
@@ -36,6 +52,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+
+        $user = Auth::user();
+
+        if($user){
+            $user->setRememberToken(null);
+            $user->save();
+        }
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

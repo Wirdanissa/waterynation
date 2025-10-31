@@ -19,14 +19,8 @@
 </head>
 
 <body>
-    @include('components.navbar')
-
-    <main class="py-4">
-
-        @yield('content')
-    </main>
-
-    @include('components.footer')
+    
+    @yield('body')
 
     {{-- Script JS --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

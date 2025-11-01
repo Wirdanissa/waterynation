@@ -1,40 +1,102 @@
-<aside id="sidebar" class="d-flex flex-column flex-shrink-0 bg-white border-end vh-100 position-fixed">
-    <!-- Logo -->
-    <div class="px-3 py-4 border-bottom">
-        <div class="d-flex align-items-center mb-3 border-bottom pb-3 border-2">
-            <img src="{{ asset('assets/img/icon.png') }}" alt="Watery Nation Logo" class="me-2"
-                style="height: 40px;">
-            <span class="fs-5 fw-semibold">Watery Nation</span>
-        </div>
+ <aside class="left-sidebar">
+     <!-- Sidebar scroll -->
+     <div class="scroll-sidebar" data-simplebar>
+         <!-- Logo Section -->
+         <div class="d-flex mb-4 align-items-center">
+             <img src="{{ asset('assets/img/icon.png') }}" alt="Logo" width="40" height="auto"
+                 class="d-inline-block me-3 rounded-circle">
+             <a class="navbar-brand d-flex d-lg-inline-block mx-auto mx-lg-0 text-center text-lg-start" href="{{route('admin.dashboard')}}">
+                 <h5 class="me-3 fw-bold fs-4 fs-md-2 fs-lg-1 text-primary mt-2" style="letter-spacing: 2px;">
+                     Watery Nation
+                 </h5>
+             </a>
+             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                 <i class="ti ti-x fs-8"></i>
+             </div>
+         </div>
 
-        <!-- Navigation -->
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a href="{{ route('admin.dashboard') }}" class="nav-link @yield('adminDashboard')">
-                    Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('logout') }}" class="nav-link @yield('adminDashboard')">
-                    Logout
-                </a>
-            </li>
-        </ul>
-    </div>
+         <hr class="fs-1">
 
-    <!-- User Info -->
-    <div class="mt-auto px-3 py-4 border-top">
-        <div class="d-flex align-items-center gap-2 bg-light p-2 rounded">
-            @if (Auth::user()->foto_profile)
-                <img src="{{ asset('storage/' . Auth::user()->foto_profile) }}" class="rounded-circle" alt="Foto Profil"
-                    style="width:40px; height:40px; object-fit:cover;">
-            @else
-                <i class="bi bi-person-circle fs-2 text-secondary"></i>
-            @endif
-            <div class="small text-dark">
-                <p class="mb-0 fw-medium">{{ Auth::user()->name }}</p>
-                <p class="mb-0 text-muted">{{ Auth::user()->email }}</p>
-            </div>
-        </div>
-    </div>
-</aside>
+         <!-- Sidebar navigation -->
+         <nav class="sidebar-nav">
+             <ul id="sidebarnav" class="mb-4 pb-2">
+                 <!-- Dashboard -->
+                 <li class="sidebar-item mb-4">
+                     <a class="sidebar-link @yield('menuDashboard')" href="" aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="ti ti-layout-dashboard fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">Dashboard</span>
+                     </a>
+                 </li>
+
+                 <!-- Booking -->
+                 <li class="sidebar-item mb-4">
+                     <a class="sidebar-link @yield('menuBooking')" href="" aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="ti ti-receipt fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">Booking</span>
+                     </a>
+                 </li>
+
+                 <!-- Feedback -->
+                 <li class="sidebar-item mb-4">
+                     <a class="sidebar-link @yield('menuFeedback')" href="" aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="ti ti-receipt fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">Feedback</span>
+                     </a>
+                 </li>
+
+                 <!-- Gallery -->
+                 <li class="sidebar-item mb-4">
+                     <a class="sidebar-link @yield('menuGallery')" href="" aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="fa-solid fa-images fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">Gallery</span>
+                     </a>
+                 </li>
+
+                 <!-- VirtualTour -->
+                 <li class="sidebar-item mb-4">
+                     <a class="sidebar-link @yield('menuTour')" href="" aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="ti ti-camera fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">Virtual Tour</span>
+                     </a>
+                 </li>
+
+                 <!-- User -->
+                 <li class="sidebar-item mb-4">
+                     <a class="sidebar-link @yield('menuUser')" href="" aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="ti ti-user fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">User</span>
+                     </a>
+                 </li>
+
+                 <!-- Logout -->
+                 <li class="sidebar-item mb-4">
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                         @csrf
+                     </form>
+                     <a class="sidebar-link" href="{{ route('logout') }}"
+                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                         aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="ti ti-logout fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">Logout</span>
+                     </a>
+                 </li>
+             </ul>
+         </nav>
+         <!-- End Sidebar navigation -->
+     </div>
+     <!-- End Sidebar scroll -->
+ </aside>

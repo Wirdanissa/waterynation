@@ -53,7 +53,7 @@
                 @enderror
             </div>
         </div>
-        <label class="flex items-center mt-2 text-sm text-gray-600" for="showPassword">
+        <label class="flex items-center mt-2 text-sm text-gray-600 mb-3" for="showPassword">
             <input type="checkbox" wire:model="showPassword" class="mr-2" id="showPassword">
             Tampilkan Password
         </label>

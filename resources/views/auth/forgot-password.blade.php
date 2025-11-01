@@ -8,7 +8,7 @@
         </p>
     </div>
 
-    <form action="{{ route('password.email') }}">
+    <form action="{{ route('password.email') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>

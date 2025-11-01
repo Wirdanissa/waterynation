@@ -9,95 +9,104 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
             <ul class="navbar-nav mx-auto text-start text-lg-center mt-lg-0 py-lg-0 mt-2 py-2">
                 <li class="nav-item">
-                    <a class="nav-link @yield('menuBeranda')" aria-current="page" href="{{ route('home') }}">Beranda</a>
+                    <a class="nav-link @yield('menuBeranda')" href="{{ route('home') }}">Beranda</a>
                 </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @yield('menuTentang')" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Tentang
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item @yield('menuProfile')" href="#">Profile</a></li>
-                        <li><a class="dropdown-item @yield('menuProfile')" href="#">Visi & Misi</a></li>
-                        <li><a class="dropdown-item @yield('menuProfile')" href="#">Tim Watery Nation</a></li>
+                    <a class="nav-link dropdown-toggle @yield('menuTentang')" href="#" id="tentangDropdown"
+                        role="button" data-bs-toggle="dropdown">Tentang</a>
+                    <ul class="dropdown-menu" aria-labelledby="tentangDropdown">
+                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><a class="dropdown-item" href="#">Visi & Misi</a></li>
+                        <li><a class="dropdown-item" href="#">Tim Watery Nation</a></li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link @yield('menuPublikasi')" href="#">Publikasi</a>
                 </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @yield('menuProgram')" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Program
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item @yield('menuOfflineAction')" href="#">Offline Action</a></li>
-                        <li><a class="dropdown-item @yield('menuOnlineAction')" href="#">Online Webinar</a></li>
-                        <li><a class="dropdown-item @yield('menuModul')" href="#">Modul Development For Kids</a></li>
+                    <a class="nav-link dropdown-toggle @yield('menuProgram')" href="#" id="programDropdown"
+                        role="button" data-bs-toggle="dropdown">Program</a>
+                    <ul class="dropdown-menu" aria-labelledby="programDropdown">
+                        <li><a class="dropdown-item" href="#">Offline Action</a></li>
+                        <li><a class="dropdown-item" href="#">Online Webinar</a></li>
+                        <li><a class="dropdown-item" href="#">Modul Development For Kids</a></li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link @yield('menuDonasi')" href="#">Donasi</a>
                 </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @yield('menuVolunteer')" href="#" id="navbarDropdownMenuLink" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Volunteer
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item @yield('menuFeedback')" href="#">Apa kata mereka</a></li>
-                        <li><a class="dropdown-item @yield('menuTeamVolunteer')" href="#">Team Volunteer</a></li>
-                        <li><a class="dropdown-item @yield('menuDaftarVolunteer')" href="#">Daftar jadi volunteer</a></li>
+                    <a class="nav-link dropdown-toggle @yield('menuVolunteer')" href="#" id="volunteerDropdown"
+                        role="button" data-bs-toggle="dropdown">Volunteer</a>
+                    <ul class="dropdown-menu" aria-labelledby="volunteerDropdown">
+                        <li><a class="dropdown-item" href="#">Apa Kata Mereka</a></li>
+                        <li><a class="dropdown-item" href="#">Tim Volunteer</a></li>
+                        <li><a class="dropdown-item" href="#">Daftar Jadi Volunteer</a></li>
                     </ul>
                 </li>
+            </ul>
+
+            <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 mt-3 mt-lg-0">
                 @switch(Auth::check() ? Auth::user()->role : 'guest')
-                    @case('Admin')
-                        <li class="nav-item d-lg-none">
-                            <a href="{{ route('admin.dashboard') }}" class="btn btn-light w-100 mt-2">Dashboard</a>
-                        </li>
+                    @case('admin')
+                        <div class="dropdown">
+                            <a class="btn btn-light dropdown-toggle w-100 w-lg-auto" href="#" id="adminMenu"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#">Tim Volunteer</a></li>
+                                <li><a class="dropdown-item" href="#">Daftar Volunteer</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     @break
 
-                    @case('User')
-                        <li class="nav-item d-lg-none">
-                            <a href="{{ route('login') }}" class="btn btn-light w-100 mt-2">Jhon Doe</a>
-                        </li>
+                    @case('user')
+                        <div class="dropdown">
+                            <a class="btn btn-light dropdown-toggle w-100 w-lg-auto" href="#" id="adminMenu"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="#">Tim Volunteer</a></li>
+                                <li><a class="dropdown-item" href="#">Daftar Volunteer</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     @break
 
                     @default
-                        <li class="nav-item dropdown d-lg-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Masuk / Daftar
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Masuk</a></li>
-                                <li><a class="dropdown-item" href="{{ route('register') }}">Daftar</a></li>
-                            </ul>
-                        </li>
+                        <a href="{{ route('login') }}" class="btn btn-outline-light w-100 w-lg-auto">Masuk / Daftar</a>
                 @endswitch
-            </ul>
+            </div>
         </div>
-        @switch(Auth::check() ? Auth::user()->role : 'guest')
-            @case('Admin')
-                <div class="d-none d-lg-flex ">
-                    <a href="" class="btn btn-light">Dashboard</a>
-                </div>
-            @break
-
-            @case('User')
-                <div class="d-none d-lg-flex ">
-                    <a href="{{ route('login') }}" class="btn btn-light">Jhon Doe</a>
-                </div>
-            @break
-
-            @default
-                <div class="d-none d-lg-flex">
-                    <a href="{{ route('login') }}" class="btn btn-light hover:btn-secondary">Masuk / Daftar</a>
-                </div>
-        @endswitch
-
     </div>
 </nav>

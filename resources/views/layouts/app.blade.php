@@ -15,15 +15,17 @@
     {{-- Script Css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    @stack('style-script')
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 
 <body>
-    
+
     @yield('body')
 
     {{-- Script JS --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    @stack('custom-script')
 </body>
 
 </html>

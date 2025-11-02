@@ -25,6 +25,7 @@
 
     {{-- Script JS --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+
     @stack('custom-script')
 </body>
 

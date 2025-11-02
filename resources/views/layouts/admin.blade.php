@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @push('style-script')
-    <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/auth/css/styles.min.css') }}" />
 @endpush
 
@@ -28,18 +27,12 @@
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                @yield('content')
+                @yield('admin-content')
             </div>
         </div>
     </div>
 @endsection
 @push('custom-script')
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="{{ asset('assets/auth/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/auth/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/auth/js/sidebarmenu.js') }}"></script>
-    <script src="{{ asset('assets/auth/js/app.min.js') }}"></script>
-    <script src="{{ asset('assets/auth/js/dashboard.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

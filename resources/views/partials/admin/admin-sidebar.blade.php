@@ -5,7 +5,8 @@
          <div class="d-flex mb-4 align-items-center">
              <img src="{{ asset('assets/img/icon.png') }}" alt="Logo" width="40" height="auto"
                  class="d-inline-block me-3 rounded-circle">
-             <a class="navbar-brand d-flex d-lg-inline-block mx-auto mx-lg-0 text-center text-lg-start" href="{{route('admin.dashboard')}}">
+             <a class="navbar-brand d-flex d-lg-inline-block mx-auto mx-lg-0 text-center text-lg-start"
+                 href="{{ route('admin.dashboard') }}">
                  <h5 class="me-3 fw-bold fs-4 fs-md-2 fs-lg-1 text-primary mt-2" style="letter-spacing: 2px;">
                      Watery Nation
                  </h5>
@@ -22,7 +23,8 @@
              <ul id="sidebarnav" class="mb-4 pb-2">
                  <!-- Dashboard -->
                  <li class="sidebar-item mb-4">
-                     <a class="sidebar-link @yield('menuDashboard')" href="" aria-expanded="false">
+                     <a class="sidebar-link @yield('menuDashboard')" href="{{ route('admin.dashboard') }}"
+                         aria-expanded="false">
                          <span class="aside-icon p-2 bg-primary rounded-3">
                              <i class="ti ti-layout-dashboard fs-5 text-light"></i>
                          </span>
@@ -32,47 +34,18 @@
 
                  <!-- Booking -->
                  <li class="sidebar-item mb-4">
-                     <a class="sidebar-link @yield('menuBooking')" href="" aria-expanded="false">
+                     <a class="sidebar-link @yield('menuProgram')" href="{{ route('admin.program.index') }}"
+                         aria-expanded="false">
                          <span class="aside-icon p-2 bg-primary rounded-3">
                              <i class="ti ti-receipt fs-5 text-light"></i>
                          </span>
-                         <span class="hide-menu ms-2 ps-1">Booking</span>
-                     </a>
-                 </li>
-
-                 <!-- Feedback -->
-                 <li class="sidebar-item mb-4">
-                     <a class="sidebar-link @yield('menuFeedback')" href="" aria-expanded="false">
-                         <span class="aside-icon p-2 bg-primary rounded-3">
-                             <i class="ti ti-receipt fs-5 text-light"></i>
-                         </span>
-                         <span class="hide-menu ms-2 ps-1">Feedback</span>
-                     </a>
-                 </li>
-
-                 <!-- Gallery -->
-                 <li class="sidebar-item mb-4">
-                     <a class="sidebar-link @yield('menuGallery')" href="" aria-expanded="false">
-                         <span class="aside-icon p-2 bg-primary rounded-3">
-                             <i class="fa-solid fa-images fs-5 text-light"></i>
-                         </span>
-                         <span class="hide-menu ms-2 ps-1">Gallery</span>
-                     </a>
-                 </li>
-
-                 <!-- VirtualTour -->
-                 <li class="sidebar-item mb-4">
-                     <a class="sidebar-link @yield('menuTour')" href="" aria-expanded="false">
-                         <span class="aside-icon p-2 bg-primary rounded-3">
-                             <i class="ti ti-camera fs-5 text-light"></i>
-                         </span>
-                         <span class="hide-menu ms-2 ps-1">Virtual Tour</span>
+                         <span class="hide-menu ms-2 ps-1">Programs</span>
                      </a>
                  </li>
 
                  <!-- User -->
                  <li class="sidebar-item mb-4">
-                     <a class="sidebar-link @yield('menuUser')" href="" aria-expanded="false">
+                     <a class="sidebar-link @yield('menuUser')" href="{{ route('admin.user.index') }}" aria-expanded="false">
                          <span class="aside-icon p-2 bg-primary rounded-3">
                              <i class="ti ti-user fs-5 text-light"></i>
                          </span>

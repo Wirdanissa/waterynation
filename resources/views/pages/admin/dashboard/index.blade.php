@@ -1,13 +1,13 @@
 @extends('layouts.admin')
-@section('adminDashboard', 'active')
+@section('menuDashboard', 'active')
 @section('title', 'Dashboard | Admin Dangau Studio')
 
 @section('admin-content')
-    <div class="space-y-6">
+    <div class="bg-white rounded-3 p-4 mb-4 d-flex flex-column flex-md-row align-items-md-center justify-content-md-between gap-3">
         {{-- Judul & Selamat Datang --}}
         <div>
-            <h1 class="text-xl lg:text-2xl font-semibold text-gray-800">Dashboard</h1>
-            <p class="text-sm lg:text-base text-gray-600">Selamat datang kembali, {{ Auth::user()->name }}!</p>
+            <h1 class="text-xl lg:text-2xl font-semibold text-dark">Dashboard</h1>
+            <p class="text-sm lg:text-base text-gray-800">Selamat datang kembali, {{ Auth::user()->name }}!</p>
         </div>
     </div>
 @endsection

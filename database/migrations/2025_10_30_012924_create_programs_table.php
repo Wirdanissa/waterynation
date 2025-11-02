@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('lokasi')->nullable();
             $table->date('start_date');
             $table->date('end_date');
+            $table->enum('status_publikasi', ['Published', 'Hidden'])->default('Hidden');
             $table->string('slug')->unique();
             $table->timestamps();
         });

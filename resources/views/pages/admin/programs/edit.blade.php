@@ -117,6 +117,22 @@
 
                 <div class="row text-dark">
                     <div class="col-lg-12">
+                        @if (old('category', $programs->category) === 'Modul Development For Kids')
+                            <div class="mb-3">
+                                <label for="link_url" class="form-label mb-3">
+                                    Link Url
+                                </label>
+                                <input type="text" name="link_url" id="link_url"
+                                    class="form-control rounded-0 @error('link_url') is-invalid @enderror"
+                                    placeholder="Masukkan link url program"
+                                    value="{{ old('link_url', $programs->link_url) }}">
+                                @error('link_url')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        @endif
                         <div class="mb-3">
                             <label for="description" class="form-label mb-3">
                                 Deskripsi Program
@@ -134,7 +150,6 @@
                         <div class="mb-3">
                             <label for="image" class="form-label mb-3">
                                 Gambar Program
-                                <span class="text-danger">*</span>
                             </label>
                             <img class="img-preview img-fluid mb-3 mt-2 col-sm-4">
                             <input class="form-control mb-3" type="file" name="image" id="image"
@@ -173,5 +188,18 @@
                 imgPreview.src = oFRGallery.target.result;
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySelect = document.getElementById('category');
+            const urlWrapper = document.getElementById('url_link_wrapper');
+
+            categorySelect.addEventListener('change', function() {
+                if (this.value === 'Modul Development For Kids') {
+                    urlWrapper.style.display = 'block';
+                } else {
+                    urlWrapper.style.display = 'none';
+                }
+            });
+        });
     </script>
 @endpush

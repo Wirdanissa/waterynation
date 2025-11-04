@@ -20,7 +20,7 @@
                     <a class="nav-link dropdown-toggle @yield('menuTentang')" href="#" id="tentangDropdown"
                         role="button" data-bs-toggle="dropdown">Tentang</a>
                     <ul class="dropdown-menu" aria-labelledby="tentangDropdown">
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><a class="dropdown-item @yield('menuProfile')" href="{{ route('profile') }}">Profil</a></li>
                         <li><a class="dropdown-item" href="#">Visi & Misi</a></li>
                         <li><a class="dropdown-item" href="#">Tim Watery Nation</a></li>
                     </ul>

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-@section('menuProgram', 'active')
+@section('menuProgramShow', 'show')
+@section('menuProgramExpanded', 'true')
+@section('menuProgramList', 'active')
 @section('title', 'Program | Admin Dangau Studio')
 
 @section('admin-content')
@@ -30,13 +32,15 @@
                         @forelse ($programs as $program)
                             <tr>
                                 <td>
-                                    @if ($program->image)
-                                        <img src="{{ asset('storage/' . $program->image) }}" alt="Gambar"
-                                            class="img-fluid mb-3 mt-2 rounded-3 rounded shadow border
-                                            border-secondary object-fit-cover""
-                                            width="80" height="80">
+                                    @if ($program->category === 'Modul Development For Kids' && $program->link_url)
+                                        <iframe width="150" height="80" src="{{ $program->link_url }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                     @else
-                                        <span class="text-muted">-</span>
+                                        <img src="{{ asset('storage/' . $program->image) }}"
+                                            class="rounded shadow border border-secondary" width="150" height="80"
+                                            alt="Program {{ $program->title }}">
                                     @endif
                                 </td>
                                 <td>{{ Str::limit($program->title, 20) }}</td>
@@ -55,7 +59,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.program.edit', $program->id) }}" class="btn btn-warning"><i
+                                    <a href="{{ route('admin.program.edit', $program->id) }}" class="btn btn-primary"><i
                                             class="ti ti-edit"></i></a>
                                     <a href="{{ route('admin.program.destroy', $program->id) }}" class="btn btn-danger"
                                         data-confirm-delete="true"><i class="ti ti-trash"></i></a>

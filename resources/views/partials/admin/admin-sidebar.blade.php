@@ -32,20 +32,52 @@
                      </a>
                  </li>
 
-                 <!-- Booking -->
+                 <!-- Program -->
+                 <li class="sidebar-item mb-3">
+                     <a class="sidebar-link d-flex align-items-center justify-content-between" data-bs-toggle="collapse"
+                         href="#programsMenu" role="button" aria-expanded="@yield('menuProgramExpanded', 'false')"
+                         aria-controls="programsMenu">
+
+                         <div class="d-flex align-items-center">
+                             <span class="aside-icon p-2 bg-primary rounded-3">
+                                 <i class="ti ti-receipt fs-5 text-light"></i>
+                             </span>
+                             <span class="hide-menu ms-2 ps-1">Menu Program</span>
+                         </div>
+                         <i class="ti ti-chevron-down"></i>
+                     </a>
+
+                     <ul class="collapse list-unstyled ms-5 mt-2 @yield('menuProgramShow')" id="programsMenu">
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.program.index') }}"
+                                 class="sidebar-link @yield('menuProgramList') ms-2 ps-1 p-2">
+                                 Program
+                             </a>
+                         </li>
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.program-registrasi.index') }}"
+                                 class="sidebar-link @yield('menuProgramRegistrations') ms-2 ps-1 p-2">
+                                 Pendaftar Program
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+
+                 {{-- Publikasi --}}
                  <li class="sidebar-item mb-4">
-                     <a class="sidebar-link @yield('menuProgram')" href="{{ route('admin.program.index') }}"
+                     <a class="sidebar-link @yield('menuPublikasi')" href="{{ route('admin.publikasi.index') }}"
                          aria-expanded="false">
                          <span class="aside-icon p-2 bg-primary rounded-3">
-                             <i class="ti ti-receipt fs-5 text-light"></i>
+                             <i class="bi bi-file-earmark-richtext-fill fs-5 text-light"></i>
                          </span>
-                         <span class="hide-menu ms-2 ps-1">Programs</span>
+                         <span class="hide-menu ms-2 ps-1">Publikasi</span>
                      </a>
                  </li>
 
                  <!-- User -->
                  <li class="sidebar-item mb-4">
-                     <a class="sidebar-link @yield('menuUser')" href="{{ route('admin.user.index') }}" aria-expanded="false">
+                     <a class="sidebar-link @yield('menuUser')" href="{{ route('admin.user.index') }}"
+                         aria-expanded="false">
                          <span class="aside-icon p-2 bg-primary rounded-3">
                              <i class="ti ti-user fs-5 text-light"></i>
                          </span>

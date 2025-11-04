@@ -12,7 +12,8 @@ class ProgramsRegistrasiController extends Controller
      */
     public function index()
     {
-        //
+        $programsRegistrasi = ProgramsRegistrasi::paginate(10);
+        return view('pages.admin.programs_regis.index', compact('programsRegistrasi'));
     }
 
     /**

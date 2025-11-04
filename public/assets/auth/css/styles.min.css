@@ -2525,7 +2525,7 @@ progress {
 .form-text {
     margin-top: 0.25rem;
     font-size: 0.875em;
-    color: var(--bs-secondary-color);
+    color: #000;
 }
 .form-control {
     display: block;
@@ -2534,7 +2534,7 @@ progress {
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.5;
-    color: var(--bs-body-color);
+    color: #000;
     background-color: transparent;
     background-clip: padding-box;
     border: var(--bs-border-width) solid #e7ecf0;
@@ -2565,7 +2565,7 @@ progress {
     cursor: pointer;
 }
 .form-control:focus {
-    color: var(--bs-body-color);
+    color: #000;
     background-color: transparent;
     border-color: #80c2ed;
     outline: 0;
@@ -2582,23 +2582,23 @@ progress {
     padding: 0;
 }
 .form-control::-webkit-input-placeholder {
-    color: var(--bs-secondary-color);
+    color: #000;
     opacity: 1;
 }
 .form-control::-moz-placeholder {
-    color: var(--bs-secondary-color);
+    color: #000;
     opacity: 1;
 }
 .form-control:-ms-input-placeholder {
-    color: var(--bs-secondary-color);
+    color: #000;
     opacity: 1;
 }
 .form-control::-ms-input-placeholder {
-    color: var(--bs-secondary-color);
+    color: #000;
     opacity: 1;
 }
 .form-control::placeholder {
-    color: var(--bs-secondary-color);
+    color: #000;
     opacity: 1;
 }
 .form-control:disabled {
@@ -2763,7 +2763,7 @@ textarea.form-control-lg {
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.5;
-    color: var(--bs-body-color);
+    color: #000000;
     background-color: transparent;
     background-image: var(--bs-form-select-bg-img),
         var(--bs-form-select-bg-icon, none);

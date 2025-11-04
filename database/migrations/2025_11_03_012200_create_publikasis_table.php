@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('programs', function (Blueprint $table) {
+        Schema::create('publikasis', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->enum('category', ['Offline Action','Online Webinar','Modul Development For Kids']);
-            $table->string('image')->nullable();
-            $table->string('link_url')->nullable();
-            $table->string('lokasi')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('image');
+            $table->string('author');
             $table->enum('status_publikasi', ['Published', 'Hidden'])->default('Hidden');
             $table->string('slug')->unique();
             $table->timestamps();
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programs');
+        Schema::dropIfExists('publikasis');
     }
 };

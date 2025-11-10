@@ -73,7 +73,7 @@ class VolunteerController extends Controller
             'slug' => $slug,
         ]);
 
-        return redirect()->route('volunter.index')->with('success', 'Volunteer berhasil ditambahkan.');
+        return redirect()->route('admin.volunteer.index')->with('success', 'Volunteer berhasil ditambahkan.');
     }
 
     /**
@@ -151,7 +151,7 @@ class VolunteerController extends Controller
             'slug' => $slug,
         ]);
 
-        return redirect()->route('volunter.index')->with('success', 'Volunteer berhasil diperbarui.');
+        return redirect()->route('admin.volunteer.index')->with('success', 'Volunteer berhasil diperbarui.');
     }
 
     /**
@@ -162,6 +162,6 @@ class VolunteerController extends Controller
         $volunteer = Volunteer::findOrFail($id);
         $volunteer->delete();
 
-        return redirect()->route('volunter.index')->with('success', 'Volunteer berhasil dihapus.');
+        return redirect()->route('admin.volunteer.index')->with('success', 'Volunteer berhasil dihapus.');
     }
 }

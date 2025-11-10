@@ -47,7 +47,6 @@
                                         <span class="text-muted">Belum ada posisi</span>
                                     @endif
                                 </td>
-
                                 <td>
                                     @if ($volunter->status_publikasi == 'Published')
                                         <span
@@ -60,8 +59,15 @@
                                 <td>
                                     <a href="{{ route('admin.volunteer.edit', $volunter->id) }}" class="btn btn-primary"><i
                                             class="ti ti-edit"></i></a>
-                                    <a href="{{ route('admin.volunteer.destroy', $volunter->id) }}" class="btn btn-danger"
-                                        data-confirm-delete="true"><i class="ti ti-trash"></i></a>
+                                    <form action="{{ route('admin.volunteer.destroy', $volunter->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Yakin ingin menghapus?')">
+                                            <i class="ti ti-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty

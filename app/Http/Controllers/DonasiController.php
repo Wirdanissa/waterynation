@@ -12,7 +12,7 @@ class DonasiController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.donasi.index');
     }
 
     /**

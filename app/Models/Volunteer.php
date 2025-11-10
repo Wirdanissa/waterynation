@@ -18,10 +18,4 @@ class Volunteer extends Model
     {
         return json_decode($value, true) ?? [];
     }
-
-    // Mutator jika mau otomatis encode saat menyimpan
-    public function setPositionsAttribute($value)
-    {
-        $this->attributes['positions'] = json_encode($value);
-    }
 }

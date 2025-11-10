@@ -62,10 +62,10 @@
                 <!-- Deskripsi Program -->
                 <div class="mb-3">
                     <label for="description" class="form-label mb-2">
-                        Deskripsi Program <span class="text-danger">*</span>
+                        Deskripsi Volunteer <span class="text-danger">*</span>
                     </label>
                     <textarea id="description_editor" name="description" class="form-control @error('description') is-invalid @enderror"
-                        placeholder="Masukkan deskripsi program">{{ old('description') }}</textarea>
+                        placeholder="Masukkan deskripsi volunteer">{{ old('description') }}</textarea>
                     @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -73,7 +73,7 @@
 
                 <!-- Gambar Program -->
                 <div class="mb-3">
-                    <label for="image" class="form-label mb-2">Gambar Program</label>
+                    <label for="image" class="form-label mb-2">Gambar Volunteer</label>
                     <img class="img-preview img-fluid mb-3 mt-2 col-sm-4" style="display: none;">
                     <input class="form-control mb-2" type="file" name="image" id="image" onchange="previewImage()">
                     <span class="text-dark" style="font-size: 13px;">Ukuran gambar maksimal 2MB</span>
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="modal-footer mt-3">
-                    <a href="{{ route('admin.program.index') }}" class="btn btn-dark rounded-3 me-3">Kembali</a>
+                    <a href="{{ route('admin.volunteer.index') }}" class="btn btn-dark rounded-3 me-3">Kembali</a>
                     <button type="submit" class="btn btn-primary rounded-3">Submit</button>
                 </div>
             </form>

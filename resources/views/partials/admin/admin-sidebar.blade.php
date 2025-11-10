@@ -32,6 +32,17 @@
                      </a>
                  </li>
 
+                 {{-- Donasi --}}
+                 <li class="sidebar-item mb-4">
+                     <a class="sidebar-link @yield('menuDonasi')" href="{{ route('admin.donasi.index') }}"
+                         aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="bi bi-wallet fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">Donasi</span>
+                     </a>
+                 </li>
+
                  <!-- Program -->
                  <li class="sidebar-item mb-3">
                      <a class="sidebar-link d-flex align-items-center justify-content-between" data-bs-toggle="collapse"
@@ -71,6 +82,48 @@
                              <i class="bi bi-file-earmark-richtext-fill fs-5 text-light"></i>
                          </span>
                          <span class="hide-menu ms-2 ps-1">Publikasi</span>
+                     </a>
+                 </li>
+
+                 {{-- Volunteer --}}
+                 <li class="sidebar-item mb-3">
+                     <a class="sidebar-link d-flex align-items-center justify-content-between" data-bs-toggle="collapse"
+                         href="#volunteerMenu" role="button" aria-expanded="@yield('menuVolunteerExpanded', 'false')"
+                         aria-controls="volunteerMenu">
+
+                         <div class="d-flex align-items-center">
+                             <span class="aside-icon p-2 bg-primary rounded-3">
+                                 <i class="ti ti-receipt fs-5 text-light"></i>
+                             </span>
+                             <span class="hide-menu ms-2 ps-1">Menu Volunteer</span>
+                         </div>
+                         <i class="ti ti-chevron-down"></i>
+                     </a>
+
+                     <ul class="collapse list-unstyled ms-5 mt-2 @yield('menuVolunteerShow')" id="volunteerMenu">
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.volunteer.index') }}"
+                                 class="sidebar-link @yield('menuVolunteerList') ms-2 ps-1 p-2">
+                                 Volunteer
+                             </a>
+                         </li>
+                         <li class="sidebar-item">
+                             <a href="{{ route('admin.volunteer-registrasi.index') }}"
+                                 class="sidebar-link @yield('menuVolunteerRegistrations') ms-2 ps-1 p-2">
+                                 Pendaftar Volunteer
+                             </a>
+                         </li>
+                     </ul>
+                 </li>
+
+                 {{-- Organisasi --}}
+                 <li class="sidebar-item mb-4">
+                     <a class="sidebar-link @yield('menuOrganisasi')" href="{{ route('admin.organisasi.index') }}"
+                         aria-expanded="false">
+                         <span class="aside-icon p-2 bg-primary rounded-3">
+                             <i class="bi bi-building-fill fs-5 text-light"></i>
+                         </span>
+                         <span class="hide-menu ms-2 ps-1">Profile Organisasi</span>
                      </a>
                  </li>
 

@@ -190,6 +190,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
             const categorySelect = document.getElementById('category');
             const urlWrapper = document.getElementById('url_link_wrapper');
 

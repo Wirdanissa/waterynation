@@ -21,8 +21,8 @@
                         role="button" data-bs-toggle="dropdown">Tentang</a>
                     <ul class="dropdown-menu" aria-labelledby="tentangDropdown">
                         <li><a class="dropdown-item @yield('menuProfile')" href="{{ route('profile') }}">Profil</a></li>
-                        <li><a class="dropdown-item" href="#">Visi & Misi</a></li>
-                        <li><a class="dropdown-item" href="#">Tim Watery Nation</a></li>
+                        <li><a class="dropdown-item @yield('menuVisiMisi')" href="{{ route('visi-misi') }}">Visi & Misi</a></li>
+                        <li><a class="dropdown-item @yield('menuTim')" href="{{ route('tim') }}">Tim Watery Nation</a></li>
                     </ul>
                 </li>
 
@@ -65,15 +65,13 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
                                 <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                                <li><a class="dropdown-item" href="#">Tim Volunteer</a></li>
-                                <li><a class="dropdown-item" href="#">Daftar Volunteer</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-                                        <button type="submit" class="dropdown-item text-danger">Logout</button>
+                                        <button type="submit" class="dropdown-item">Logout</button>
                                     </form>
                                 </li>
                             </ul>
@@ -87,7 +85,6 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
-                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                                 <li><a class="dropdown-item" href="#">Tim Volunteer</a></li>
                                 <li><a class="dropdown-item" href="#">Daftar Volunteer</a></li>
                                 <li>

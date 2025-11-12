@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('force.verified')->group(function () {
     Route::get('/', [LandingController::class, 'index'])->name('home');
     Route::get('/profile', [LandingController::class, 'profile'])->name('profile');
+    Route::get('/visi-misi', [LandingController::class, 'landingVisiMisi'])->name('visi-misi');
+    Route::get('/tim', [LandingController::class, 'landingTim'])->name('tim');
 });
 
 Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function() {

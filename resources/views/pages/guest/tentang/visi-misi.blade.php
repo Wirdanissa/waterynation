@@ -12,12 +12,12 @@
             </div>
 
             <div class="col-md-6 px-4">
-                <h2 class="fw-bold mb-4"
+                <h3 class="fw-bold mb-4"
                     style="position: relative; display: inline-block; padding-bottom: 10px; margin-bottom: 25px;">
                     Visi <span class="text-primary">Watery Nation</span>
                     <span
                         style="position:absolute; left:0; bottom:0; width:70px; height:3px; background-color:#0d6efd; border-radius:2px;"></span>
-                </h2>
+                </h3>
                 <p style="font-size: 1.05rem; color: #333; line-height: 1.8; margin-bottom: 0;">
                     {!! $visiMisi->visi !!}
                 </p>
@@ -30,12 +30,12 @@
             </div>
 
             <div class="col-md-6 px-4">
-                <h2 class="fw-bold mb-4"
+                <h3 class="fw-bold mb-4"
                     style="position: relative; display: inline-block; padding-bottom: 10px; margin-bottom: 25px;">
                     Misi <span class="text-primary">Watery Nation</span>
                     <span
                         style="position:absolute; left:0; bottom:0; width:70px; height:3px; background-color:#0d6efd; border-radius:2px;"></span>
-                </h2>
+                </h3>
                 <p style="font-size: 1.05rem; color: #333; line-height: 1.8; margin-bottom: 0;">
                     {!! $visiMisi->misi !!}
                 </p>

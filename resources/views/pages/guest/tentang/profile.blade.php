@@ -15,7 +15,7 @@
                         style="position:absolute; left:0; bottom:0; width:85px; height:3px; background-color:#0d6efd; border-radius:2px;"></span>
                 </h2>
 
-                <div style="font-size:1.08rem; color:#333; line-height:1.9;">
+                <div class="fs-6" style="color:#333; line-height:1.9;">
                     {!! $tentang->about ?? 'Informasi tentang organisasi belum tersedia.' !!}
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     style="position:absolute; left:0; bottom:0; width:95px; height:3px; background-color:#0d6efd; border-radius:2px;"></span>
             </h2>
 
-            <div style="max-width:900px; margin:auto; text-align:justify; font-size:1.05rem; color:#444; line-height:1.9;">
+            <div class="fs-6" style="max-width:900px; margin:auto; text-align:justify; color:#444; line-height:1.9;">
                 {!! $tentang->core_values ?? 'Belum ada data Core Values.' !!}
             </div>
         </div>
@@ -42,7 +42,7 @@
                     style="position:absolute; left:0; bottom:0; width:95px; height:3px; background-color:#0d6efd; border-radius:2px;"></span>
             </h2>
 
-            <div style="max-width:900px; margin:auto; text-align:justify; font-size:1.05rem; color:#444; line-height:1.9;">
+            <div class="fs-6" style="max-width:900px; margin:auto; text-align:justify; color:#444; line-height:1.9;">
                 {!! $tentang->focus_areas ?? 'Belum ada data Focus Areas.' !!}
             </div>
         </div>

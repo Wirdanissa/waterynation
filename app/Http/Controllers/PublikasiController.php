@@ -12,6 +12,13 @@ class PublikasiController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function userPublikasi()
+    {
+        $publikasis = Publikasi::where('status_publikasi', 'Published')->orderBy('title', 'asc')->paginate(10);
+        return view('pages.guest.publikasi.index', compact('publikasis'));
+    }
+
     public function index()
     {
         $publikasis = Publikasi::whereIn('status_publikasi', ['Published', 'Hidden'])->orderBy('title', 'asc')->paginate(10);
@@ -76,9 +83,11 @@ class PublikasiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Publikasi $publikasi)
+    public function show(string $slug)
     {
-        //
+        $publikasis = Publikasi::where('slug', $slug)->firstOrFail();
+        $rekomendasi = Publikasi::where('status_publikasi', 'Published')->where('id', '!=', $publikasis->id)->inRandomOrder()->limit(5)->get();
+        return view('pages.guest.publikasi.detail', compact('publikasis', 'rekomendasi'));
     }
 
     /**

@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('force.verified')->group(function () {
     Route::get('/', [LandingController::class, 'index'])->name('home');
+    // Tentang
     Route::get('/profile', [LandingController::class, 'profile'])->name('profile');
     Route::get('/visi-misi', [LandingController::class, 'landingVisiMisi'])->name('visi-misi');
     Route::get('/tim', [LandingController::class, 'landingTim'])->name('tim');
+    // Publikasi
+    Route::get('/publikasi', [PublikasiController::class, 'userPublikasi'])->name('publikasi');
+    Route::get('/publikasi/{slug}', [PublikasiController::class, 'show'])->name('publikasi.show');
 });
 
 Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function() {
@@ -28,7 +32,9 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function() {
     // ProgramsRegistrasi
     Route::resource('/admin/programs-registrasi', ProgramsRegistrasiController::class)->names('admin.program-registrasi');
     // Publikasi
-    Route::resource('/admin/publikasi', PublikasiController::class)->names('admin.publikasi');
+    Route::resource('/admin/publikasi', PublikasiController::class)
+        ->names('admin.publikasi')
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     // Volunteer
     Route::resources(['admin/volunteer' => VolunteerController::class], ['names' => 'admin.volunteer']);
     // VolunteerRegistrations

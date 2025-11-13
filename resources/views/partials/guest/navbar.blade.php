@@ -27,7 +27,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link @yield('menuPublikasi')" href="#">Publikasi</a>
+                    <a class="nav-link @yield('menuPublikasi')" href="{{ route('publikasi') }}">Publikasi</a>
                 </li>
 
                 <li class="nav-item dropdown">

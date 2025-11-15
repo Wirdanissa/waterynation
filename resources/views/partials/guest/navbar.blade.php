@@ -34,9 +34,9 @@
                     <a class="nav-link dropdown-toggle @yield('menuProgram')" href="#" id="programDropdown"
                         role="button" data-bs-toggle="dropdown">Program</a>
                     <ul class="dropdown-menu" aria-labelledby="programDropdown">
-                        <li><a class="dropdown-item" href="#">Offline Action</a></li>
-                        <li><a class="dropdown-item" href="#">Online Webinar</a></li>
-                        <li><a class="dropdown-item" href="#">Modul Development For Kids</a></li>
+                        <li><a class="dropdown-item @yield('menuOfflineAction')" href="{{ route('programs.offline-action') }}">Offline Action</a></li>
+                        <li><a class="dropdown-item @yield('menuOnlineWebinar')" href="{{ route('programs.online-webinar') }}">Online Webinar</a></li>
+                        <li><a class="dropdown-item @yield('menuModulDevelopmentForKids')" href="{{ route('programs.modul-development-for-kids') }}">Modul Development For Kids</a></li>
                     </ul>
                 </li>
 

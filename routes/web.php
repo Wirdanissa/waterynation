@@ -20,6 +20,11 @@ Route::middleware('force.verified')->group(function () {
     // Publikasi
     Route::get('/publikasi', [PublikasiController::class, 'userPublikasi'])->name('publikasi');
     Route::get('/publikasi/{slug}', [PublikasiController::class, 'show'])->name('publikasi.show');
+    // Programs
+    Route::get('/programs/offline-action', [ProgramsController::class, 'offlineAction'])->name('programs.offline-action');
+    Route::get('/programs/online-webinar', [ProgramsController::class, 'onlineWebinar'])->name('programs.online-webinar');
+    Route::get('/programs/modul-development-for-kids', [ProgramsController::class, 'modulDevelopmentForKids'])->name('programs.modul-development-for-kids');
+    Route::get('/programs/{slug}', [ProgramsController::class, 'show'])->name('programs.show');
 });
 
 Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function() {
@@ -28,7 +33,8 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function() {
     // Donasi
     Route::resource('/admin/donasi', DonasiController::class)->names('admin.donasi');
     // Programs
-    Route::resource('/admin/programs', ProgramsController::class)->names('admin.program');
+    Route::resource('/admin/programs', ProgramsController::class)->names('admin.program')
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);;
     // ProgramsRegistrasi
     Route::resource('/admin/programs-registrasi', ProgramsRegistrasiController::class)->names('admin.program-registrasi');
     // Publikasi

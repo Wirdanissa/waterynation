@@ -9,6 +9,31 @@ use Illuminate\Support\Str;
 
 class ProgramsController extends Controller
 {
+
+    public function offlineAction()
+    {
+        $offlineAction = Programs::where('category', 'Offline Action')
+            ->where('status_publikasi','Published')
+            ->paginate(12);
+        return view('pages.guest.program.offline', compact('offlineAction'));
+    }
+
+    public function onlineWebinar()
+    {
+        $onlineWebinar = Programs::where('category', 'Online Webinar')
+            ->where('status_publikasi','Published')
+            ->paginate(12);
+        return view('pages.guest.program.online', compact('onlineWebinar'));
+    }
+
+    public function modulDevelopmentForKids()
+    {
+        $modulDevelopmentForKids = Programs::where('category', 'Modul Development For Kids')
+            ->where('status_publikasi','Published')
+            ->paginate(12);
+        return view('pages.guest.program.modul', compact('modulDevelopmentForKids'));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -92,9 +117,27 @@ class ProgramsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Programs $programs)
+    public function show(string $slug)
     {
-        //
+        $programs = Programs::where('slug', $slug)->firstOrFail();
+        $rekomendasi = Programs::where('status_publikasi', 'Published')->where('id', '!=', $programs->id)->inRandomOrder()->limit(5)->get();
+        $routes = [
+            'Offline Action' => '   offline-action',
+            'Online Webinar' => '   online-webinar',
+            'Modul Development For Kids' => '   modul-development-for-kids',
+        ];
+
+        // rute kembali berdasarkan kategori
+        $backRoute = $routes[$programs->category] ?? 'programs.offline-action';
+
+        $menuMap = [
+            'Offline Action' => 'menuOfflineAction',
+            'Online Webinar' => 'menuOnlineWebinar',
+            'Modul Development For Kids' => 'menuModulDevelopmentForKids',
+        ];
+
+        $activeMenu = $menuMap[$programs->category] ?? null;
+        return view('pages.guest.program.detail', compact('programs','rekomendasi', 'backRoute', 'activeMenu'));
     }
 
     /**

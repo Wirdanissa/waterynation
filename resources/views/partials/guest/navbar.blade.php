@@ -21,8 +21,10 @@
                         role="button" data-bs-toggle="dropdown">Tentang</a>
                     <ul class="dropdown-menu" aria-labelledby="tentangDropdown">
                         <li><a class="dropdown-item @yield('menuProfile')" href="{{ route('profile') }}">Profil</a></li>
-                        <li><a class="dropdown-item @yield('menuVisiMisi')" href="{{ route('visi-misi') }}">Visi & Misi</a></li>
-                        <li><a class="dropdown-item @yield('menuTim')" href="{{ route('tim') }}">Tim Watery Nation</a></li>
+                        <li><a class="dropdown-item @yield('menuVisiMisi')" href="{{ route('visi-misi') }}">Visi & Misi</a>
+                        </li>
+                        <li><a class="dropdown-item @yield('menuTim')" href="{{ route('tim') }}">Tim Watery Nation</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -34,23 +36,27 @@
                     <a class="nav-link dropdown-toggle @yield('menuProgram')" href="#" id="programDropdown"
                         role="button" data-bs-toggle="dropdown">Program</a>
                     <ul class="dropdown-menu" aria-labelledby="programDropdown">
-                        <li><a class="dropdown-item @yield('menuOfflineAction')" href="{{ route('programs.offline-action') }}">Offline Action</a></li>
-                        <li><a class="dropdown-item @yield('menuOnlineWebinar')" href="{{ route('programs.online-webinar') }}">Online Webinar</a></li>
-                        <li><a class="dropdown-item @yield('menuModulDevelopmentForKids')" href="{{ route('programs.modul-development-for-kids') }}">Modul Development For Kids</a></li>
+                        <li><a class="dropdown-item @yield('menuOfflineAction')"
+                                href="{{ route('programs.offline-action') }}">Offline Action</a></li>
+                        <li><a class="dropdown-item @yield('menuOnlineWebinar')"
+                                href="{{ route('programs.online-webinar') }}">Online Webinar</a></li>
+                        <li><a class="dropdown-item @yield('menuModulDevelopmentForKids')"
+                                href="{{ route('programs.modul-development-for-kids') }}">Modul Development For Kids</a>
+                        </li>
                     </ul>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link @yield('menuDonasi')" href="#">Donasi</a>
+                    <a class="nav-link @yield('menuDonasi')" href="{{ route('donasi') }}">Donasi</a>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle @yield('menuVolunteer')" href="#" id="volunteerDropdown"
                         role="button" data-bs-toggle="dropdown">Volunteer</a>
                     <ul class="dropdown-menu" aria-labelledby="volunteerDropdown">
+                        <li><a class="dropdown-item @yield('menuListVolunteer')" href="{{ route('volunteer') }}">Volunteer</a></li>
                         <li><a class="dropdown-item" href="#">Apa Kata Mereka</a></li>
                         <li><a class="dropdown-item" href="#">Tim Volunteer</a></li>
-                        <li><a class="dropdown-item" href="#">Daftar Jadi Volunteer</a></li>
                     </ul>
                 </li>
             </ul>

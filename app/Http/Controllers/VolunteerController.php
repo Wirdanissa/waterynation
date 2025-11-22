@@ -9,6 +9,15 @@ use Illuminate\Support\Str;
 
 class VolunteerController extends Controller
 {
+
+    // User
+    public function volunteerUser()
+    {
+        $volunteers = Volunteer::where('status_publikasi', 'Published')->orderBy('title', 'asc')->paginate(10);
+        // dd($volunteers);
+        return view('pages.guest.volunteer.index', compact('volunteers'));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -62,8 +71,6 @@ class VolunteerController extends Controller
 
         $slug = Str::slug($validatedData['title']);
 
-        $validatedData['positions'] = json_encode($validatedData['positions']);
-
         Volunteer::create([
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
@@ -79,9 +86,11 @@ class VolunteerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Volunteer $volunteer)
+    public function show(string $slug)
     {
-        //
+        $volunteers = Volunteer::where('slug', $slug)->firstOrFail();
+        $rekomendasi = Volunteer::where('status_publikasi', 'Published')->where('id', '!=', $volunteers->id)->inRandomOrder()->limit(5)->get();
+        return view('pages.guest.volunteer.detail', compact('volunteers','rekomendasi'));
     }
 
     /**
@@ -133,14 +142,13 @@ class VolunteerController extends Controller
             if ($volunteer->image) {
                 Storage::delete('public/' . $volunteer->image);
             }
-            $imagePath = $request->file('image')->store('vo$volunteer', 'public');
+            $imagePath = $request->file('image')->store('volunteer', 'public');
             $validatedData['image'] = $imagePath;
         } else {
             unset($validatedData['image']);
         }
 
         $slug = Str::slug($validatedData['title']);
-        $validatedData['positions'] = json_encode($validatedData['positions']);
 
         $volunteer->update([
             'title' => $validatedData['title'],

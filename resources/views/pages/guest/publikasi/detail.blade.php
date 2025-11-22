@@ -44,7 +44,7 @@
 
                 @forelse ($rekomendasi as $lain)
                     <a href="{{ route('publikasi.show', $lain->slug) }}" class="text-decoration-none text-dark">
-                        <div class="card mb-3 border-0 shadow-sm rounded-3 overflow-hidden"
+                        <div class="card mb-3 pt-2 border-0 shadow-sm rounded-3 overflow-hidden"
                             style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)';"
                             onmouseout="this.style.transform='scale(1)';">
                             <div class="row g-0">

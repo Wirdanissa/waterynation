@@ -25,24 +25,33 @@ Route::middleware('force.verified')->group(function () {
     Route::get('/programs/online-webinar', [ProgramsController::class, 'onlineWebinar'])->name('programs.online-webinar');
     Route::get('/programs/modul-development-for-kids', [ProgramsController::class, 'modulDevelopmentForKids'])->name('programs.modul-development-for-kids');
     Route::get('/programs/{slug}', [ProgramsController::class, 'show'])->name('programs.show');
+    // Donasi
+    Route::get('/donasi', [DonasiController::class, 'donasiUser'])->name('donasi');
+    // Volunteer
+    Route::get('/volunteer', [VolunteerController::class, 'volunteerUser'])->name('volunteer');
+    Route::get('/volunteer/{slug}', [VolunteerController::class, 'show'])->name('volunteer.show');
 });
 
-Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function() {
+Route::group(['middleware' => [ 'role:admin','auth', 'verified']], function() {
     // Dashboard
     Route::get('/admin/dashboard', [LandingController::class, 'admin'])->name('admin.dashboard');
     // Donasi
-    Route::resource('/admin/donasi', DonasiController::class)->names('admin.donasi');
+    Route::resource('/admin/donasi', DonasiController::class)->names('admin.donasi')
+        ->only(['index', 'create', 'edit', 'update', 'destroy']);
     // Programs
     Route::resource('/admin/programs', ProgramsController::class)->names('admin.program')
-        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);;
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     // ProgramsRegistrasi
-    Route::resource('/admin/programs-registrasi', ProgramsRegistrasiController::class)->names('admin.program-registrasi');
+    Route::resource('/admin/programs-registrasi', ProgramsRegistrasiController::class)->names('admin.program-registrasi')
+        ->only(['index', 'create','show', 'edit', 'update', 'destroy']);
     // Publikasi
     Route::resource('/admin/publikasi', PublikasiController::class)
         ->names('admin.publikasi')
         ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     // Volunteer
-    Route::resources(['admin/volunteer' => VolunteerController::class], ['names' => 'admin.volunteer']);
+    Route::resource('/admin/volunteer', VolunteerController::class)
+        ->names('admin.volunteer')
+        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     // VolunteerRegistrations
     Route::resources(['admin/volunteer-registrations' => VolunterRegisterController::class], ['names' => 'admin.volunteer-registrasi']);
     // Organisasi
@@ -53,8 +62,12 @@ Route::group(['middleware' => ['auth', 'verified', 'role:admin']], function() {
     Route::get('/admin/users/{id}/edit', [LandingController::class, 'adminEditUser'])->name('admin.user.edit');
 });
 
-Route::middleware('auth')->group(function () {
-
+Route::group(['middleware' => ['role:user','auth', 'verified']], function() {
+    // ProgramsRegistrasi
+    Route::resource('/programs-registrasi', ProgramsRegistrasiController::class)->names('program-registrasi');
+    Route::resource('/volunteer-registrasi', VolunterRegisterController::class)->names('volunteer-registrasi');
+    // Donasi
+    Route::post('/donasi', [DonasiController::class, 'store'])->name('donasi.store');
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

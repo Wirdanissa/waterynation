@@ -7,15 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Volunteer extends Model
 {
     protected $guarded = [];
+    protected $casts = [
+        'positions' => 'array',
+    ];
 
     public function volunter_register()
     {
         return $this->hasMany(VolunterRegister::class);
     }
 
-    // Accessor untuk positions
-    public function getPositionsAttribute($value)
-    {
-        return json_decode($value, true) ?? [];
-    }
+
+    // // Accessor untuk positions
+    // public function getPositionsAttribute($value)
+    // {
+    //     return json_decode($value, true) ?? [];
+    // }
 }

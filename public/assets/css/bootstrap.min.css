@@ -2613,7 +2613,7 @@ textarea.form-control.is-invalid {
     }
 }
 .btn:hover {
-    color: #212529;
+    color: #3674b5;
 }
 .btn-check:focus + .btn,
 .btn:focus {

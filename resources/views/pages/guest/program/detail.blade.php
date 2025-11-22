@@ -47,13 +47,30 @@
                 <div class="text-muted" style="font-size:0.95rem; line-height:1.7;">
                     {!! $programs->description !!}
                 </div>
+
+                <!-- Tombol Daftar Sekarang -->
+                @if ($programs->category !== 'Modul Development For Kids')
+                    @auth
+                        <button class="btn btn-primary w-100 rounded-3 px-4 py-2 mb-4" data-bs-toggle="modal"
+                            data-bs-target="#modalDaftar">
+                            Daftar Sekarang
+                        </button>
+                    @else
+                        <a href="{{ route('login') }}?redirect={{ url()->current() }}"
+                            class="btn btn-primary w-100 rounded-3 px-4 py-2 mb-4">
+                            Login untuk Daftar
+                        </a>
+                    @endauth
+                @endif
+
             </div>
+
             <div class="col-lg-4">
                 <h5 class="fw-bold mb-3">Publikasi Lainnya</h5>
 
                 @forelse ($rekomendasi as $lain)
                     <a href="{{ route('publikasi.show', $lain->slug) }}" class="text-decoration-none text-dark">
-                        <div class="card mb-3 border-0 shadow-sm rounded-3 overflow-hidden"
+                        <div class="card mb-3 pt-2 border-0 shadow-sm rounded-3 overflow-hidden"
                             style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)';"
                             onmouseout="this.style.transform='scale(1)';">
                             <div class="row g-0">
@@ -83,5 +100,72 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Modal Form Registrasi -->
+    <div class="modal fade" id="modalDaftar" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Form Registrasi Program</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form action="{{ route('program-registrasi.store') }}" method="POST">
+                    @csrf
+
+                    <input type="hidden" name="program_id" value="{{ $programs->id }}">
+
+                    <div class="modal-body">
+
+                        {{-- NAMA --}}
+                        <div class="mb-3">
+                            <label class="form-label">Nama Lengkap</label>
+
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name', auth()->user()->name ?? '') }}"
+                                @if (auth()->check()) readonly @endif required>
+
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        {{-- EMAIL --}}
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                value="{{ old('email', auth()->user()->email ?? '') }}"
+                                @if (auth()->check()) readonly @endif required>
+
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        {{-- PHONE (editable kalau user belum punya phone) --}}
+                        <div class="mb-3">
+                            <label class="form-label">No. Telepon</label>
+
+                            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
+                                value="{{ old('phone', auth()->user()->phone ?? '') }}"
+                                @if (auth()->check() && auth()->user()->phone) readonly @endif required>
+
+                            @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Kirim Pendaftaran</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
 @endsection

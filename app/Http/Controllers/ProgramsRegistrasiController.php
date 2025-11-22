@@ -12,7 +12,9 @@ class ProgramsRegistrasiController extends Controller
      */
     public function index()
     {
-        $programsRegistrasi = ProgramsRegistrasi::paginate(10);
+        $programsRegistrasi = ProgramsRegistrasi::with('program')
+        ->orderBy('program_id', 'asc')  
+        ->paginate(10);
         return view('pages.admin.programs_regis.index', compact('programsRegistrasi'));
     }
 
@@ -31,7 +33,7 @@ class ProgramsRegistrasiController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:programs_registrasis,email,NULL,id,program_id,' . $request->program_id,
             'program_id' => 'required|integer|exists:programs,id',
             'phone' => 'required|string|min:10|max:15',
         ],[
@@ -40,6 +42,7 @@ class ProgramsRegistrasiController extends Controller
             'name.max' => 'Nama lengkap maksimal 255 karakter.',
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Email harus berupa alamat email yang valid.',
+            'email.unique' => 'Email ini sudah terdaftar di program ini.',
             'email.max' => 'Email maksimal 255 karakter.',
             'program_id.required' => 'Program wajib dipilih.',
             'program_id.integer' => 'Program tidak valid.',
@@ -52,7 +55,7 @@ class ProgramsRegistrasiController extends Controller
 
         ProgramsRegistrasi::create($validatedData);
 
-        return redirect()->route('admin.programs.index')->with('success', 'Registrasi berhasil dikirim.');
+        return redirect()->back()->with('success', 'Registrasi berhasil dikirim.');
     }
 
     /**

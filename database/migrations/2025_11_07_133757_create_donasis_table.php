@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('bukti_transfer');
             $table->string('status');
             $table->string('keterangan');
+            $table->boolean('show_name')->default(true);
             $table->timestamps();
         });
     }

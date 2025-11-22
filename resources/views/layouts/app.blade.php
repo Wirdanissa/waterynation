@@ -26,6 +26,7 @@
     {{-- Script JS --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
+    @include('sweetalert::alert')
     @stack('custom-script')
 </body>
 

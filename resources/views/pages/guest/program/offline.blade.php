@@ -18,7 +18,7 @@
                 <div class="row g-4">
                     @forelse ($offlineAction as $publikasi)
                         <div class="col-12 col-md-6 col-lg-3">
-                            <a href="{{ route('publikasi.show', $publikasi->slug) }}"
+                            <a href="{{ route('programs.show', $publikasi->slug) }}"
                                 class="text-decoration-none text-dark">
                                 <div class="card h-100 shadow-sm rounded-3">
                                     <div class="position-relative border-bottom border-3">

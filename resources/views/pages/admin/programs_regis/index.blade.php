@@ -21,40 +21,24 @@
                             <th scope="col">Email</th>
                             <th scope="col">Program</th>
                             <th scope="col">Tanggal Daftar</th>
-                            <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($programsRegistrasi as $registrasi)
                             <tr>
-                                <td>{{ $registrasi->nama_peserta }}</td>
+                                <td>{{ $registrasi->name }}</td>
                                 <td>{{ $registrasi->email }}</td>
                                 <td>
-                                    {{ $registrasi->programs ? $registrasi->programs->title : '-' }}
+                                    {{ $registrasi->program ? $registrasi->program->title : '-' }}
                                 </td>
                                 <td>{{ tanggal($registrasi->created_at) }}</td>
                                 <td>
-                                    @if ($registrasi->status == 'Diterima')
-                                        <span class="badge bg-light-success text-success rounded-pill px-3 py-2 fs-3">
-                                            Diterima
-                                        </span>
-                                    @elseif ($registrasi->status == 'Ditolak')
-                                        <span class="badge bg-light-danger text-danger rounded-pill px-3 py-2 fs-3">
-                                            Ditolak
-                                        </span>
-                                    @else
-                                        <span class="badge bg-light-secondary text-muted rounded-pill px-3 py-2 fs-3">
-                                            Pending
-                                        </span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.program.registrations.show', $registrasi->id) }}"
+                                    {{-- <a href="{{ route('admin.program-registrasi.show', $registrasi->id) }}"
                                         class="btn btn-info btn-sm">
                                         <i class="ti ti-eye"></i>
-                                    </a>
-                                    <form action="{{ route('admin.program.registrations.destroy', $registrasi->id) }}"
+                                    </a> --}}
+                                    <form action="{{ route('admin.program-registrasi.destroy', $registrasi->id) }}"
                                         method="POST" class="d-inline"
                                         onsubmit="return confirm('Yakin ingin menghapus pendaftar ini?')">
                                         @csrf

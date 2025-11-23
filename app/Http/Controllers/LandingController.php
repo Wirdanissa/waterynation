@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organisasi;
+use App\Models\Publikasi;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -12,7 +14,17 @@ class LandingController extends Controller
     // User
     public function index()
     {
-        return view('pages.guest.home.index');
+        $publikasis = Publikasi::where('status_publikasi', 'published')
+            ->inRandomOrder()
+            ->take(12)
+            ->get();
+
+        $volunteers = Volunteer::where('status_publikasi', 'published')
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
+
+        return view('pages.guest.home.index', compact('publikasis', 'volunteers'));
     }
 
     public function profile()

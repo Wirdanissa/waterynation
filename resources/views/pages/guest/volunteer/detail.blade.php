@@ -29,9 +29,25 @@
                             style="position:absolute; left:0; bottom:0; width:100%; height:3px; background-color:#0d6efd; border-radius:2px;"></span>
                     </h3>
                     <div class="text-muted mb-3" style="font-size:0.9rem;">
-                        <i class="bi bi-calendar-event"></i>
-                        {{ tanggal($volunteers->start_date) }} |
-                        <i class="bi bi-person-fill"></i> {{ $volunteers->lokasi }}
+                        <div class="text-muted mb-3" style="font-size:0.9rem;">
+                            <i class="bi bi-people-fill"></i>
+                            Posisi Dibutuhkan:
+                            @foreach ($volunteers->positions as $item)
+                                <span
+                                    style="
+                                            background:#e8f0ff;
+                                            color:#0d6efd;
+                                            padding:4px 8px;
+                                            font-size:14px;
+                                            border-radius:6px;
+                                            margin-right:4px;
+                                            display:inline-block;
+                                            margin-bottom:4px;
+                                        ">
+                                    {{ $item }}
+                                </span>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
 
@@ -41,19 +57,17 @@
                 </div>
 
                 <!-- Tombol Daftar Sekarang -->
-                @if ($volunteers->category !== 'Modul Development For Kids')
-                    @auth
-                        <button class="btn btn-primary w-100 rounded-3 px-4 py-2 mb-4" data-bs-toggle="modal"
-                            data-bs-target="#modalDaftar">
-                            Daftar Sekarang
-                        </button>
-                    @else
-                        <a href="{{ route('login') }}?redirect={{ url()->current() }}"
-                            class="btn btn-primary w-100 rounded-3 px-4 py-2 mb-4">
-                            Login untuk Daftar
-                        </a>
-                    @endauth
-                @endif
+                @auth
+                    <button class="btn btn-primary w-100 rounded-3 px-4 py-2 mb-4" data-bs-toggle="modal"
+                        data-bs-target="#modalDaftar">
+                        Daftar Sekarang
+                    </button>
+                @else
+                    <a href="{{ route('login') }}?redirect={{ url()->current() }}"
+                        class="btn btn-primary w-100 rounded-3 px-4 py-2 mb-4">
+                        Login untuk Daftar
+                    </a>
+                @endauth
 
             </div>
 

@@ -21,7 +21,7 @@
                             <a href="{{ route('programs.show', $publikasi->slug) }}"
                                 class="text-decoration-none text-dark">
                                 <div class="card h-100 shadow-sm rounded-3">
-                                    <div class="position-relative border-bottom border-3">
+                                    <div class="position-relative">
                                         <img src="{{ Storage::url($publikasi->image) }}"
                                             class="card-img-top rounded-top-3 object-cover"
                                             style="width: 100%; height: 200px;" alt="{{ $publikasi->title }}">

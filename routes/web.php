@@ -30,6 +30,8 @@ Route::middleware('force.verified')->group(function () {
     // Volunteer
     Route::get('/volunteer', [VolunteerController::class, 'volunteerUser'])->name('volunteer');
     Route::get('/volunteer/{slug}', [VolunteerController::class, 'show'])->name('volunteer.show');
+    Route::get('/apa-kata-mereka', [VolunteerController::class, 'testimoni'])->name('apa-kata-mereka');
+    Route::get('/volunteer-tim', [VolunteerController::class, 'volunteerTim'])->name('volunteer.tim');
 });
 
 Route::group(['middleware' => [ 'role:admin','auth', 'verified']], function() {

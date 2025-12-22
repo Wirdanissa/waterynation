@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donasi;
 use App\Models\Organisasi;
+use App\Models\Programs;
 use App\Models\Publikasi;
 use App\Models\User;
 use App\Models\Volunteer;
+use App\Models\VolunterRegister;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -24,7 +27,16 @@ class LandingController extends Controller
             ->take(3)
             ->get();
 
-        return view('pages.guest.home.index', compact('publikasis', 'volunteers'));
+        $donasis = Donasi::where('status', 'accepted')
+            ->sum('total_donasi');
+
+        $relawan = VolunterRegister::where('status', 'accepted')
+            ->count();
+
+        $aktivitas = Programs::where('status_publikasi', 'published')
+            ->count();
+
+        return view('pages.guest.home.index', compact('publikasis', 'volunteers', 'donasis', 'relawan', 'aktivitas'));
     }
 
     public function profile()

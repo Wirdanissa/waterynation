@@ -9,3 +9,10 @@ if (!function_exists('format_tanggal')) {
     }
 }
 
+if (!function_exists('formatRp')) {
+    function formatRp($angka)
+    {
+        return 'Rp ' . number_format($angka, 0, ',', '.');
+    }
+}
+

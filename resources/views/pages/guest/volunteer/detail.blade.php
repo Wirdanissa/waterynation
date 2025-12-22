@@ -72,10 +72,10 @@
             </div>
 
             <div class="col-lg-4">
-                <h5 class="fw-bold mb-3">Publikasi Lainnya</h5>
+                <h5 class="fw-bold mb-3">Volunteer Lainnya</h5>
 
                 @forelse ($rekomendasi as $lain)
-                    <a href="{{ route('publikasi.show', $lain->slug) }}" class="text-decoration-none text-dark">
+                    <a href="{{ route('volunteer.show', $lain->slug) }}" class="text-decoration-none text-dark">
                         <div class="card mb-3 pt-2 border-0 shadow-sm rounded-3 overflow-hidden"
                             style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.02)';"
                             onmouseout="this.style.transform='scale(1)';">
@@ -101,7 +101,7 @@
                         </div>
                     </a>
                 @empty
-                    <p class="text-muted">Belum ada publikasi lainnya.</p>
+                    <p class="text-muted">Belum ada volunteer lainnya.</p>
                 @endforelse
             </div>
         </div>
@@ -128,7 +128,7 @@
                                     <label class="form-label">Nama Lengkap</label>
                                     <input type="text" name="name"
                                         class="form-control @error('name') is-invalid @enderror"
-                                        value="{{ old('name') }}" required>
+                                        value="{{ auth()->user()->name }}" readonly>
                                     @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -137,7 +137,7 @@
                                     <label class="form-label">Email</label>
                                     <input type="email" name="email"
                                         class="form-control @error('email') is-invalid @enderror"
-                                        value="{{ old('email') }}" required>
+                                        value="{{ auth()->user()->email }}" readonly>
                                     @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -206,7 +206,6 @@
                         <button type="submit" class="btn btn-primary">Kirim Pendaftaran</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

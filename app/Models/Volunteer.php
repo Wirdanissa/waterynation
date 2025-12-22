@@ -15,11 +15,4 @@ class Volunteer extends Model
     {
         return $this->hasMany(VolunterRegister::class);
     }
-
-
-    // // Accessor untuk positions
-    // public function getPositionsAttribute($value)
-    // {
-    //     return json_decode($value, true) ?? [];
-    // }
 }

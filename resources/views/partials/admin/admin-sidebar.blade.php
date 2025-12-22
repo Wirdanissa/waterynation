@@ -104,7 +104,7 @@
                          <li class="sidebar-item">
                              <a href="{{ route('admin.volunteer.index') }}"
                                  class="sidebar-link @yield('menuVolunteerList') ms-2 ps-1 p-2">
-                                 Volunteer
+                                 Program Volunteer
                              </a>
                          </li>
                          <li class="sidebar-item">

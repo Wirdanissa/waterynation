@@ -13,7 +13,14 @@ class VolunterRegisterController extends Controller
      */
     public function index()
     {
-        //
+        $volunteers = VolunterRegister::with('volunter')
+            ->whereHas('volunter', function ($q) {
+                $q->where('status_publikasi', 'Published');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('pages.admin.volunteer_regis.index', compact('volunteers'));
     }
 
     /**
@@ -89,17 +96,35 @@ class VolunterRegisterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(VolunterRegister $volunterRegister)
+    public function edit(string $id)
     {
-        //
+        $volunteer = VolunterRegister::with('volunter')->findOrFail($id);
+
+        $status = [
+            'accepted' => 'Accepted',
+            'pending' => 'Pending',
+        ];
+
+        return view('pages.admin.volunteer_regis.edit', compact('volunteer', 'status'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VolunterRegister $volunterRegister)
+    public function update(Request $request, string $id)
     {
-        //
+        $volunteer = VolunterRegister::findOrFail($id);
+
+        $validatedData  = $request->validate([
+        'status' => 'required|in:accepted,pending',
+        ],[
+        'status.required' => 'Status wajib diisi.',
+        'status.in' => 'Status harus berupa "accepted" atau "pending".',
+        ]);
+
+        $volunteer->update($validatedData);
+
+        return redirect()->route('admin.volunteer-registrasi.index')->with('success', 'Status berhasil diperbarui!');
     }
 
     /**

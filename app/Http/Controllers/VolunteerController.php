@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Volunteer;
+use App\Models\VolunterRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -171,5 +172,19 @@ class VolunteerController extends Controller
         $volunteer->delete();
 
         return redirect()->route('admin.volunteer.index')->with('success', 'Volunteer berhasil dihapus.');
+    }
+
+    public function testimoni()
+    {
+        return view('pages.guest.volunteer.testimoni');
+    }
+
+    public function volunteerTim()
+    {
+        $volunteers = VolunterRegister::with('volunter')
+            ->where('status','accepted')
+            ->get();
+        // dd($volunteers);
+        return view('pages.guest.volunteer.tim', compact('volunteers'));
     }
 }

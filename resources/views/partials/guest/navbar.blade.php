@@ -54,9 +54,9 @@
                     <a class="nav-link dropdown-toggle @yield('menuVolunteer')" href="#" id="volunteerDropdown"
                         role="button" data-bs-toggle="dropdown">Volunteer</a>
                     <ul class="dropdown-menu" aria-labelledby="volunteerDropdown">
-                        <li><a class="dropdown-item @yield('menuListVolunteer')" href="{{ route('volunteer') }}">Volunteer</a></li>
-                        <li><a class="dropdown-item" href="#">Apa Kata Mereka</a></li>
-                        <li><a class="dropdown-item" href="#">Tim Volunteer</a></li>
+                        <li><a class="dropdown-item @yield('menuListVolunteer')" href="{{ route('volunteer') }}">Program Volunteer</a></li>
+                        <li><a class="dropdown-item @yield('menuApaKataMereka')" href="{{ route('apa-kata-mereka') }}">Apa Kata Mereka</a></li>
+                        <li><a class="dropdown-item @yield('menuTimVolunteer')" href="{{ route('volunteer.tim') }}">Tim Volunteer</a></li>
                     </ul>
                 </li>
             </ul>

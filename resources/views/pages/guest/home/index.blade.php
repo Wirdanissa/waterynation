@@ -37,7 +37,7 @@
                     <div class="d-flex align-items-center gap-3">
                         <i class="bi bi-people fs-1 text-primary"></i>
                         <div class="text-start">
-                            <h4 class="fw-bold m-0">300.672</h4>
+                            <h4 class="fw-bold m-0">{{ $relawan }}</h4>
                             <small class="text-muted">Relawan</small>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                     <div class="d-flex align-items-center gap-3">
                         <i class="bi bi-heart-fill fs-1 text-primary"></i>
                         <div class="text-start">
-                            <h4 class="fw-bold m-0">Rp 1.000.000+</h4>
+                            <h4 class="fw-bold m-0">{{ formatRp($donasis) }}</h4>
                             <small class="text-muted">Donasi Terkumpul</small>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                     <div class="d-flex align-items-center gap-3">
                         <i class="bi bi-activity fs-1 text-primary"></i>
                         <div class="text-start">
-                            <h4 class="fw-bold m-0">12.691</h4>
+                            <h4 class="fw-bold m-0">{{ $aktivitas }}</h4>
                             <small class="text-muted">Aktivitas</small>
                         </div>
                     </div>

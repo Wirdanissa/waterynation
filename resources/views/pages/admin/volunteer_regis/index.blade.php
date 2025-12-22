@@ -1,19 +1,14 @@
 @extends('layouts.admin')
 @section('menuVolunteerShow', 'show')
 @section('menuVolunteerExpanded', 'true')
-@section('menuVolunteerList', 'active')
+@section('menuVolunteerRegistrations', 'active')
 @section('title', 'Volunter | Admin Dangau Studio')
 
 @section('admin-content')
     <div class="card w-100">
         <div class="card-body p-4">
             <div class="nav d-flex flex-column flex-md-row mb-3 align-items-md-center">
-                <h5 class="mb-3 fw-bold me-md-auto">Program Volunteer</h5>
-                <a href="{{ route('admin.volunteer.create') }}"
-                    class="btn btn-primary rounded-3 btn-sm d-flex align-items-center py-2 px-3 me-3 mb-3" role="button">
-                    <i class="ti ti-plus fs-7 me-2"></i>
-                    Tambah Volunteer
-                </a>
+                <h5 class="mb-3 fw-bold me-md-auto">Daftar Volunteer</h5>
             </div>
 
             <div class="table-responsive" data-simplebar>
@@ -21,8 +16,9 @@
                     <thead class="table-primary text-center">
                         <tr>
                             <th scope="col">Gambar Volunteer</th>
-                            <th scope="col">Judul Volunteer</th>
-                            <th scope="col">Deskripsi Volunteer</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Nama Volunteer</th>
                             <th scope="col">Posisi</th>
                             <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
@@ -36,28 +32,27 @@
                                         class="rounded shadow border border-secondary" width="150" height="80"
                                         alt="Volunteer {{ $volunter->title }}">
                                 </td>
-                                <td>{{ Str::limit($volunter->title, 20) }}</td>
-                                <td>{!! Str::limit($volunter->description, 30) !!}</td>
                                 <td>
-                                    @if ($volunter->positions)
-                                        @foreach ($volunter->positions as $position)
-                                            <span class="badge bg-info me-1">{{ $position }}</span>
-                                        @endforeach
+                                    {{ $volunter->name }}
+                                </td>
+                                <td>
+                                    {{ $volunter->email }}
+                                </td>
+                                <td>{{ Str::limit($volunter->volunter->title, 20) }}</td>
+                                <td>
+                                    {{ $volunter->position }}
+                                </td>
+                                <td>
+                                    @if ($volunter->status == 'accepted')
+                                        <span
+                                            class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Accepted</span>
                                     @else
-                                        <span class="text-muted">Belum ada posisi</span>
+                                        <span
+                                            class="badge bg-light-danger rounded-pill text-danger px-3 py-2 fs-3">Pending</span>
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($volunter->status_publikasi == 'Published')
-                                        <span
-                                            class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Published</span>
-                                    @else
-                                        <span
-                                            class="badge bg-light-danger rounded-pill text-danger px-3 py-2 fs-3">Hidden</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.volunteer.edit', $volunter->id) }}" class="btn btn-primary"><i
+                                    <a href="{{ route('admin.volunteer-registrasi.edit', $volunter->id) }}" class="btn btn-primary"><i
                                             class="ti ti-edit"></i></a>
                                     <form action="{{ route('admin.volunteer.destroy', $volunter->id) }}" method="POST"
                                         class="d-inline">

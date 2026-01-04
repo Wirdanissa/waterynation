@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('menuPublikasi', 'active')
-@section('title', 'Publikasi | Admin Dangau Studio')
+@section('title', 'Publikasi | Admin WateryNation')
 
 @section('admin-content')
 
@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="modal-footer mt-3">
-                    <a href="{{ route('admin.program.index') }}" class="btn btn-dark rounded-3 me-3 ">Kembali</a>
+                    <a href="{{ route('admin.programs.index') }}" class="btn btn-dark rounded-3 me-3 ">Kembali</a>
                     <button type="submit" class="btn btn-primary rounded-3">Submit</button>
                 </div>
             </form>

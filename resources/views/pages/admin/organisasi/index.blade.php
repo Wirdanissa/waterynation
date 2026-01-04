@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('menuOrganisasi', 'active')
-@section('title', 'Profile Organisasi | Admin Dangau Studio')
+@section('title', 'Profile Organisasi | Admin WateryNation')
 
 @section('admin-content')
     <div class="card w-100">

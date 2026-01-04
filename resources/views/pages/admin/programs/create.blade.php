@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('menuProgram', 'active')
-@section('title', 'Program | Admin Dangau Studio')
+@section('title', 'Program | Admin WateryNation')
 
 @section('admin-content')
     <div class="card">
         <div class="card-body">
             <h5 class="card-title fw-semibold mb-4">Tambah Program</h5>
-            <form action="{{ route('admin.program.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.programs.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row text-dark">
                     <!-- Kolom pertama -->
@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="modal-footer mt-3">
-                    <a href="{{ route('admin.program.index') }}" class="btn btn-dark rounded-3 me-3 ">Kembali</a>
+                    <a href="{{ route('admin.programs.index') }}" class="btn btn-dark rounded-3 me-3 ">Kembali</a>
                     <button type="submit" class="btn btn-primary rounded-3">Submit</button>
                 </div>
             </form>

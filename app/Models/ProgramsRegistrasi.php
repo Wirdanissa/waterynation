@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProgramsRegistrasi extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'program_id',
+        'name',
+        'email',
+        'phone',
+    ];
 
     public function program()
     {
-        return $this->belongsTo(Programs::class);
+        return $this->belongsTo(Programs::class, 'program_id');
     }
 }
+

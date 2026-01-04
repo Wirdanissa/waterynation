@@ -2,91 +2,105 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Programs;
 use App\Models\ProgramsRegistrasi;
 use Illuminate\Http\Request;
+use App\Exports\ProgramsRegistrasiExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rule;
 
 class ProgramsRegistrasiController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * List pendaftar + Dashboard Statistik
      */
-    public function index()
+    public function index(Request $request)
     {
-        $programsRegistrasi = ProgramsRegistrasi::with('program')
-        ->orderBy('program_id', 'asc')  
-        ->paginate(10);
-        return view('pages.admin.programs_regis.index', compact('programsRegistrasi'));
+        // 1. Ambil daftar program untuk dropdown filter
+        $programs = Programs::query()
+            ->where(function ($q) {
+                $q->where('slug', 'like', '%online%')
+                  ->orWhere('slug', 'like', '%offline%');
+            })
+            ->orderBy('title')
+            ->get();
+
+        // 2. Query Utama untuk Tabel
+        $query = ProgramsRegistrasi::with('program')
+            ->whereHas('program', function ($q) {
+                $q->where('slug', 'like', '%online%')
+                  ->orWhere('slug', 'like', '%offline%');
+            });
+
+        // 3. Logic Dashboard Statistik (Sebelum difilter oleh dropdown)
+        $statsQuery = clone $query;
+        $stats = [
+            'total'   => $statsQuery->count(),
+            'online'  => (clone $statsQuery)->whereHas('program', function($q) {
+                            $q->where('slug', 'like', '%online%');
+                         })->count(),
+            'offline' => (clone $statsQuery)->whereHas('program', function($q) {
+                            $q->where('slug', 'like', '%offline%');
+                         })->count(),
+        ];
+
+        // 4. Filter dropdown pendaftar
+        if ($request->filled('program_id')) {
+            $query->where('program_id', $request->program_id);
+        }
+
+        $programsRegistrasi = $query
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('pages.admin.programs_regis.index', compact(
+            'programsRegistrasi', 
+            'programs', 
+            'stats'
+        ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:programs_registrasis,email,NULL,id,program_id,' . $request->program_id,
-            'program_id' => 'required|integer|exists:programs,id',
+        $request->validate([
+            'name'  => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'phone' => 'required|string|min:10|max:15',
-        ],[
-            'name.required' => 'Nama lengkap wajib diisi.',
-            'name.string' => 'Nama lengkap harus berupa teks.',
-            'name.max' => 'Nama lengkap maksimal 255 karakter.',
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Email harus berupa alamat email yang valid.',
-            'email.unique' => 'Email ini sudah terdaftar di program ini.',
-            'email.max' => 'Email maksimal 255 karakter.',
-            'program_id.required' => 'Program wajib dipilih.',
-            'program_id.integer' => 'Program tidak valid.',
-            'program_id.exists' => 'Program yang dipilih tidak ada.',
-            'phone.required' => 'Nomor telepon wajib diisi.',
-            'phone.string' => 'Nomor telepon harus berupa teks.',
-            'phone.min' => 'Nomor telepon minimal 10 karakter.',
-            'phone.max' => 'Nomor telepon maksimal 15 karakter.',
+            'program_id' => [
+                'required',
+                Rule::exists('programs', 'id')->where(function ($q) {
+                    $q->where('slug', 'like', '%online%')
+                      ->orWhere('slug', 'like', '%offline%');
+                }),
+            ],
         ]);
 
-        ProgramsRegistrasi::create($validatedData);
+        $exists = ProgramsRegistrasi::where([
+            'email'      => $request->email,
+            'program_id' => $request->program_id,
+        ])->exists();
 
-        return redirect()->back()->with('success', 'Registrasi berhasil dikirim.');
+        if ($exists) {
+            return back()->withErrors(['email' => 'Anda sudah terdaftar di program ini.']);
+        }
+
+        ProgramsRegistrasi::create($request->only(['name', 'email', 'phone', 'program_id']));
+
+        return back()->with('success', 'Registrasi berhasil dikirim.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProgramsRegistrasi $programsRegistrasi)
+    public function exportExcel(Request $request)
     {
-        //
+        return Excel::download(
+            new ProgramsRegistrasiExport($request->program_id),
+            'pendaftar-program.xlsx'
+        );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProgramsRegistrasi $programsRegistrasi)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ProgramsRegistrasi $programsRegistrasi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ProgramsRegistrasi $programsRegistrasi)
-    {
-        //
+        ProgramsRegistrasi::findOrFail($id)->delete();
+        return back()->with('success', 'Pendaftar berhasil dihapus.');
     }
 }

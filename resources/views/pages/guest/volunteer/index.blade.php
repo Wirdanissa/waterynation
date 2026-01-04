@@ -5,7 +5,8 @@
 @section('menuListVolunteer', 'active')
 
 @section('content')
-    <div class="container py-5">
+    {{-- Tambahkan min-height di sini agar footer tidak naik --}}
+    <div class="container py-5" style="min-height: 75vh;">
         <div class="row align-items-start mb-5">
             <div class="col-md-12" style="padding: 0 40px;">
                 <h3 class="fw-bold mb-4"
@@ -26,33 +27,19 @@
                                             style="width: 100%; height: 200px;" alt="{{ $volunteer->title }}">
                                     </div>
                                     <div class="card-body">
-
                                         <h5 class="fw-bold mb-3" style="font-size:1.1rem;">
                                             {{ $volunteer->title }}
                                         </h5>
-
                                         <div class="mb-3">
                                             @foreach ($volunteer->positions as $item)
-                                                <span
-                                                    style="
-                                            background:#e8f0ff;
-                                            color:#0d6efd;
-                                            padding:4px 8px;
-                                            font-size:11px;
-                                            border-radius:6px;
-                                            margin-right:4px;
-                                            display:inline-block;
-                                            margin-bottom:4px;
-                                        ">
+                                                <span style="background:#e8f0ff; color:#0d6efd; padding:4px 8px; font-size:11px; border-radius:6px; margin-right:4px; display:inline-block; margin-bottom:4px;">
                                                     {{ $item }}
                                                 </span>
                                             @endforeach
                                         </div>
-
                                         <p class="mb-0" style="font-size:0.85rem; color:#6c757d; line-height:1.4;">
                                             {!! Str::limit(strip_tags($volunteer->description), 110) !!}
                                         </p>
-
                                     </div>
                                 </div>
                             </a>

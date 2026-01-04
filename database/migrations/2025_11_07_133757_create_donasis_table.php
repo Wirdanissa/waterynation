@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->date('tanggal_donasi');
-            $table->unsignedBigInteger('total_donasi');
+            $table->unsignedBigInteger('total_donasi');   // simpan rupiah sebagai integer
             $table->string('bukti_transfer');
-            $table->string('status');
-            $table->string('keterangan');
-            $table->boolean('show_name')->default(true);
+            $table->string('status')->default('pending');  // aman kalau lupa set [web:101]
+            $table->string('keterangan')->nullable();      // <— sekarang boleh NULL
+            $table->boolean('show_name')->default(true);   // default tampil nama [web:98]
             $table->timestamps();
         });
     }

@@ -13,22 +13,28 @@ use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
-
-    // User
+    /**
+     * Tampilan Landing Page (Beranda) - Bagian User
+     */
     public function index()
     {
         $publikasis = Publikasi::where('status_publikasi', 'published')
-            ->inRandomOrder()
+            ->latest()
             ->take(12)
             ->get();
 
         $volunteers = Volunteer::where('status_publikasi', 'published')
-            ->inRandomOrder()
+            ->latest()
             ->take(3)
             ->get();
 
-        $donasis = Donasi::where('status', 'accepted')
+        $donasis = Donasi::where('status', 'success')
             ->sum('total_donasi');
+
+        $latest_donations = Donasi::where('status', 'success')
+            ->latest()
+            ->take(10)
+            ->get();
 
         $relawan = VolunterRegister::where('status', 'accepted')
             ->count();
@@ -36,7 +42,34 @@ class LandingController extends Controller
         $aktivitas = Programs::where('status_publikasi', 'published')
             ->count();
 
-        return view('pages.guest.home.index', compact('publikasis', 'volunteers', 'donasis', 'relawan', 'aktivitas'));
+        return view('pages.guest.home.index', compact(
+            'publikasis', 
+            'volunteers', 
+            'donasis', 
+            'relawan', 
+            'aktivitas',
+            'latest_donations'
+        ));
+    }
+
+    /**
+     * DASHBOARD ADMIN - Sekarang sudah Dinamis
+     */
+    public function admin()
+    {
+        // Mengambil data real dari database untuk statistik
+        $totalDonasi = Donasi::where('status', 'success')->sum('total_donasi');
+        $countProgram = Programs::count();
+        $countVolunteerReg = VolunterRegister::count();
+        $countPublikasi = Publikasi::count();
+
+        // Mengirim data ke view agar angka di dashboard terupdate
+        return view('pages.admin.dashboard.index', compact(
+            'totalDonasi',
+            'countProgram',
+            'countVolunteerReg',
+            'countPublikasi'
+        ));
     }
 
     public function profile()
@@ -56,21 +89,27 @@ class LandingController extends Controller
         return view('pages.guest.tentang.tim');
     }
 
-    // Admin
-    public function admin(){
-        return view('pages.admin.dashboard.index');
-    }
+    /**
+     * MANAJEMEN USER ADMIN
+     */
     public function adminUser()
     {
         $users = User::where('role', 'user')
-            ->orderBy('name', 'asc')->paginate(10);
+            ->orderBy('name', 'asc')
+            ->paginate(10);
         return view('pages.admin.user.index', compact('users'));
+    }
+
+    public function adminEditUser(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('pages.admin.user.edit', compact('user'));
     }
 
     public function adminDeleteUser(string $id)
     {
-        $users = User::findOrFail($id);
-        $users->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
         return redirect()->route('admin.user.index')->with('success', 'User berhasil dihapus');
     }
 }

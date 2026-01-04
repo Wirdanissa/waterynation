@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('menuPublikasi', 'active')
-@section('title', 'Edit Publikasi | Admin Dangau Studio')
+@section('title', 'Edit Publikasi | Admin WateryNation')
 
 @section('admin-content')
 

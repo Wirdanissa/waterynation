@@ -60,7 +60,7 @@
 
                      <ul class="collapse list-unstyled ms-5 mt-2 @yield('menuProgramShow')" id="programsMenu">
                          <li class="sidebar-item">
-                             <a href="{{ route('admin.program.index') }}"
+                             <a href="{{ route('admin.programs.index') }}"
                                  class="sidebar-link @yield('menuProgramList') ms-2 ps-1 p-2">
                                  Program
                              </a>

@@ -2,7 +2,7 @@
 @section('menuVolunteerShow', 'show')
 @section('menuVolunteerExpanded', 'true')
 @section('menuVolunteerList', 'active')
-@section('title', 'Volunter | Admin Dangau Studio')
+@section('title', 'Volunter | Admin WateryNation')
 
 @section('admin-content')
     <div class="card w-100">

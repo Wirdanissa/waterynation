@@ -82,7 +82,7 @@ Route::group(['middleware' => ['role:user', 'auth', 'verified']], function () {
         ->only(['store', 'index']); 
 
     Route::resource('/volunteer-registrasi', VolunterRegisterController::class)
-        ->names('volunteer-registrasi-user')
+        ->names('volunteer-registrasi')
         ->only(['store']);
 
     Route::post('/donasi', [DonasiController::class, 'store'])->name('donasi.store');

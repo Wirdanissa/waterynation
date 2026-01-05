@@ -12,13 +12,28 @@ class Programs extends Model
 
     protected $guarded = [];
 
-    // Casting tanggal
+    /**
+     * Gunakan SLUG sebagai route key
+     * agar Route::resource('/programs') tetap bisa
+     * dipakai dengan URL /programs/{slug}
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Casting atribut
+     */
     protected $casts = [
-        'start_date' => 'date',
-        'end_date'   => 'date',
-        'is_registrasi' => 'boolean',
+        'start_date'     => 'date',
+        'end_date'       => 'date',
+        'is_registrasi'  => 'boolean',
     ];
 
+    /**
+     * Relasi ke tabel pendaftaran program
+     */
     public function regisProgram(): HasMany
     {
         return $this->hasMany(ProgramsRegistrasi::class, 'program_id');

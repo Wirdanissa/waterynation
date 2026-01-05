@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProgramsRegistrasi extends Model
 {
@@ -13,9 +14,11 @@ class ProgramsRegistrasi extends Model
         'phone',
     ];
 
-    public function program()
+    /**
+     * Relasi ke program
+     */
+    public function program(): BelongsTo
     {
         return $this->belongsTo(Programs::class, 'program_id');
     }
 }
-

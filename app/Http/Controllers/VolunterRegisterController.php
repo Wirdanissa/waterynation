@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\VolunterRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class VolunterRegisterController extends Controller
 {
@@ -14,21 +15,10 @@ class VolunterRegisterController extends Controller
     public function index()
     {
         $volunteers = VolunterRegister::with('volunter')
-            ->whereHas('volunter', function ($q) {
-                $q->where('status_publikasi', 'Published');
-            })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return view('pages.admin.volunteer_regis.index', compact('volunteers'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -38,59 +28,41 @@ class VolunterRegisterController extends Controller
     {
         $validated = $request->validate([
             'volunter_id' => 'required|exists:volunteers,id',
-            'name'       => 'required|string|max:255',
-            'email'      => 'required|email|max:255|unique:volunter_registers,email,NULL,id,volunter_id,' . $request->volunter_id,
-            'phone'      => 'required|string|min:11|max:15',
-            'instagram'  => 'nullable|string|max:255',
-            'linkedin'   => 'nullable|string|max:255',
-            'position'   => 'required|string|max:255',
-            'image'      => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ],[
-            'volunter_id.required' => 'ID Volunteer wajib diisi.',
-            'volunter_id.exists' => 'ID Volunteer tidak ditemukan.',
-            'name.required' => 'Nama wajib diisi.',
-            'name.string' => 'Nama harus berupa teks.',
-            'name.max' => 'Nama maksimal 255 karakter.',
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Email harus berupa alamat email yang valid.',
-            'email.unique' => 'Email sudah terdaftar.',
-            'email.max' => 'Email maksimal 255 karakter.',
-            'phone.required' => 'Nomor telepon wajib diisi.',
-            'phone.string' => 'Nomor telepon harus berupa teks.',
-            'phone.max' => 'Nomor telepon maksimal 15 karakter.',
-            'phone.min' => 'Nomor telepon minimal 11 karakter.',
-            'instagram.string' => 'Instagram harus berupa teks.',
-            'instagram.max' => 'Instagram maksimal 255 karakter.',
-            'linkedin.string' => 'Linkedin harus berupa teks.',
-            'linkedin.max' => 'Linkedin maksimal 255 karakter.',
-            'position.required' => 'Posisi wajib diisi.',
-            'position.string' => 'Posisi harus berupa teks.',
-            'position.max' => 'Posisi maksimal 255 karakter.',
-            'image.required' => 'Gambar wajib diisi.',
-            'image.image' => 'Gambar harus berupa gambar.',
-            'image.mimes' => 'Gambar harus berformat jpeg, png, atau jpg.',
-            'image.max' => 'Ukuran gambar maksimal 2MB.',
+            'name'        => 'required|string|max:255',
+            'email'       => 'required|email|max:255',
+            'phone'       => 'required|string|min:10|max:15',
+            'instagram'   => 'nullable|string|max:255',
+            'linkedin'    => 'nullable|string|max:255',
+            'position'    => 'required|string|max:255',
+            // PERBAIKAN: Format PDF dan Max 10MB (10240 KB)
+            'image'       => 'required|mimes:pdf|max:10240',
+        ], [
+            'image.mimes' => 'Dokumen yang diunggah harus berformat PDF.',
+            'image.max'   => 'Ukuran dokumen maksimal adalah 10MB.',
+            'phone.min'   => 'Nomor telepon minimal 10 digit.',
         ]);
 
+        // Cek Double Registration (User tidak boleh daftar di lowongan yang sama dua kali)
+        $exists = VolunterRegister::where('volunter_id', $request->volunter_id)
+                                  ->where('email', $request->email)
+                                  ->exists();
+        
+        if ($exists) {
+            return redirect()->back()->with('error', 'Anda sudah mendaftar untuk posisi ini sebelumnya.');
+        }
+
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('volunteer-registrations', 'public');
+            // Folder penyimpanan PDF
+            $imagePath = $request->file('image')->store('volunteer-registrations/cv', 'public');
             $validated['image'] = $imagePath;
         }
 
-        $validated['slug'] = Str::slug($validated['name']);
+        $validated['slug'] = Str::slug($validated['name'] . '-' . Str::random(5));
         $validated['status'] = 'Pending';
 
         VolunterRegister::create($validated);
 
-        return redirect()->back()->with('success', 'Pendaftaran berhasil!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(VolunterRegister $volunterRegister)
-    {
-        //
+        return redirect()->back()->with('success', 'Pendaftaran Anda berhasil dikirim! Kami akan menghubungi Anda melalui WhatsApp/Email.');
     }
 
     /**
@@ -115,23 +87,28 @@ class VolunterRegisterController extends Controller
     {
         $volunteer = VolunterRegister::findOrFail($id);
 
-        $validatedData  = $request->validate([
-        'status' => 'required|in:accepted,pending',
-        ],[
-        'status.required' => 'Status wajib diisi.',
-        'status.in' => 'Status harus berupa "accepted" atau "pending".',
+        $validatedData = $request->validate([
+            'status' => 'required|in:accepted,pending',
         ]);
 
         $volunteer->update($validatedData);
 
-        return redirect()->route('admin.volunteer-registrasi.index')->with('success', 'Status berhasil diperbarui!');
+        return redirect()->route('admin.volunteer-registrasi.index')->with('success', 'Status pendaftar berhasil diperbarui!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VolunterRegister $volunterRegister)
+    public function destroy(string $id)
     {
-        //
+        $volunteer = VolunterRegister::findOrFail($id);
+        
+        if ($volunteer->image) {
+            Storage::disk('public')->delete($volunteer->image);
+        }
+        
+        $volunteer->delete();
+
+        return redirect()->back()->with('success', 'Data pendaftar berhasil dihapus.');
     }
 }
